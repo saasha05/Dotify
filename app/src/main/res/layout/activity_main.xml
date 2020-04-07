@@ -7,46 +7,53 @@
     android:padding="16dp"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/etUsername"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/llUserDetailsContainer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="username"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnChangeUser"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/btnChangeUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Change user"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        <EditText
+            android:id="@+id/etUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="username" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btnChangeUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change user" />
+    </LinearLayout>
 
 
     <ImageView
         android:id="@+id/ivAlbumCover"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:scaleType="fitCenter"
+        android:layout_height="350dp"
+        android:paddingTop="10dp"
+        android:scaleType="fitXY"
         android:src="@drawable/song_cover"
-        app:layout_constraintTop_toBottomOf="@id/btnChangeUser"
-        />
+        app:layout_constraintTop_toBottomOf="@id/llUserDetailsContainer" />
 
     <TextView
         android:id="@+id/tvSongTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SLOW DANCING IN THE DARK"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="36sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@+id/ivAlbumCover"
-        />
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/tvArtistInfo"
@@ -65,59 +72,44 @@
         android:id="@+id/tvNumPlays"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tvArtistInfo"
+        android:layout_marginTop="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="10dp"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/tvArtistInfo" />
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tvNumPlays"
-        android:weightSum="5"
-        android:layout_marginTop="10dp">
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/tvNumPlays">
 
-        <Button
+        <ImageButton
             android:id="@+id/btnPrev"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_weight="1"
-            app:layout_constraintTop_toBottomOf="@+id/tvNumPlays"
+            android:layout_weight="0.5"
             android:background="@drawable/ic_previous"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/btnPlay"
-            />
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-        <Button
+            android:foreground="?selectableItemBackground" />
+
+        <ImageButton
             android:id="@+id/btnPlay"
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="110dp"
+            android:layout_marginHorizontal="30dp"
             android:layout_weight="1"
-            app:layout_constraintTop_toBottomOf="@+id/tvNumPlays"
             android:background="@drawable/ic_play"
-            app:layout_constraintLeft_toRightOf="@+id/btnPrev"
-            app:layout_constraintRight_toLeftOf="@+id/btnNext"
+            android:foreground="?selectableItemBackground" />
 
-            />
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-        <Button
+        <ImageButton
             android:id="@+id/btnNext"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_weight="1"
-            app:layout_constraintTop_toBottomOf="@+id/tvNumPlays"
+            android:layout_weight="0.5"
             android:background="@drawable/ic_next"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/btnPlay"
-            />
+            android:foreground="?selectableItemBackground" />
     </LinearLayout>
 
 
