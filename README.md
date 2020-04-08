@@ -1,5 +1,5 @@
 # Homework 1: Dotify
-**Author: Saasha Mor
+**Author: Saasha Mor**
 
 # Functionality
 
