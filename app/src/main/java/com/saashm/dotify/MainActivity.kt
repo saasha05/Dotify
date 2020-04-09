@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
+//import kotlinx.android.synthetic.main.linear_layout.*
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "Skipping to $direction track", Toast.LENGTH_SHORT).show()
     }
     fun changeUser(view: View) {
-        llChangeUserContainer.visibility = View.INVISIBLE
+        llChangeUserContainer.visibility = View.GONE
         llApplyUserContainer.visibility = View.VISIBLE
 
     }
