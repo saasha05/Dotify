@@ -7,7 +7,7 @@ This is a proof of concept for an app where people can listen to music on the cl
 I have completed extra credit #1, #2, #3, #4 and #5
 
 ## Screenshots
-![screenshot of music player on phone](imgs/dotify.png)
+<image alt="screenshot of music player on phone" src="imgs/dotify.png" height="500" />
 
 
 ## Installation & Usage
