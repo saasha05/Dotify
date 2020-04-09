@@ -14,6 +14,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         android:visibility="visible">
 
         <TextView
@@ -46,6 +48,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         android:visibility="invisible">
 
         <EditText
@@ -69,7 +73,12 @@
             android:onClick="applyUser"
             android:text="Apply" />
     </LinearLayout>
-
+    <androidx.constraintlayout.widget.Barrier
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="llApplyUserContainer, llChangeUserContainer"
+        />
     <!-- Song Cover image-->
     <ImageButton
         android:id="@+id/ibAlbumCover"
@@ -90,14 +99,13 @@
         android:id="@+id/tvSongTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_spacing"
         android:text="@string/default_song_name"
-        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="@dimen/large_text"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ibAlbumCover"
-        android:layout_marginTop="@dimen/medium_spacing"/>
+        app:layout_constraintTop_toBottomOf="@+id/ibAlbumCover" />
 
     <TextView
         android:id="@+id/tvArtistInfo"
@@ -106,6 +114,7 @@
         android:ellipsize="end"
         android:singleLine="true"
         android:text="@string/default_artist"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textSize="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -118,12 +127,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/medium_spacing"
         android:paddingBottom="@dimen/medium_spacing"
+        android:textAlignment="center"
         android:textSize="@dimen/medium_text"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvArtistInfo"
-        />
-
+        app:layout_constraintTop_toBottomOf="@+id/tvArtistInfo" />
 
     <!-- Layout for play, previous and next buttons-->
     <ImageButton
@@ -133,7 +141,7 @@
         app:layout_constraintRight_toLeftOf="@+id/btnPlay"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvNumPlays"
+        app:layout_constraintTop_toBottomOf="@id/tvNumPlays"
         android:src="@drawable/ic_previous"
         android:background="@null"
         android:foreground="?selectableItemBackground"
@@ -147,7 +155,7 @@
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintLeft_toRightOf="@+id/btnPrev"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvNumPlays"
+        app:layout_constraintTop_toBottomOf="@id/tvNumPlays"
         android:src="@drawable/ic_play"
         android:background="@null"
         android:foreground="?selectableItemBackground"
@@ -162,7 +170,7 @@
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintLeft_toRightOf="@+id/btnPlay"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvNumPlays"
+        app:layout_constraintTop_toBottomOf="@id/tvNumPlays"
         android:src="@drawable/ic_next"
         android:background="@null"
         android:foreground="?selectableItemBackground"

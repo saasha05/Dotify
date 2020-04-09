@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.random.Random
 
@@ -52,15 +53,18 @@ class MainActivity : AppCompatActivity() {
             llApplyUserContainer.visibility = View.INVISIBLE
         }
     }
+    private fun changeTvColor(color: Int) {
+        tvUsername.setTextColor(ContextCompat.getColor(this, color))
+        tvSongTitle.setTextColor(ContextCompat.getColor(this, color))
+        tvArtistInfo.setTextColor(ContextCompat.getColor(this, color))
+        tvNumPlays.setTextColor(ContextCompat.getColor(this, color))
+
+    }
     private fun changeTextColor() {
-        when(Random.nextInt(1, 4)) {
-            1 -> { theme.applyStyle(R.style.style1, true)
-                setContentView(R.layout.activity_main) }
-            2 -> { theme.applyStyle(R.style.style2, true)
-                setContentView(R.layout.activity_main) }
-            3 -> { theme.applyStyle(R.style.style3, true)
-                setContentView(R.layout.activity_main) }
-        }
+        val colors = listOf(R.color.purple, R.color.darkBlue, R.color.green, R.color.neonBlue, R.color.orange, R.color.red)
+        changeTvColor(colors[Random.nextInt(1, 6)])
+
+
     }
 
 }
