@@ -13,6 +13,10 @@ buildscript {
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+
+        implementation "androidx.recyclerview:recyclerview:1.1.0"
+        implementation 'com.ericchee:songdataprovider:1.0.5'
+
     }
 }
 
