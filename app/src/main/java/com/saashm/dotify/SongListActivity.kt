@@ -3,7 +3,6 @@ package com.saashm.dotify
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import com.ericchee.songdataprovider.Song
 import com.ericchee.songdataprovider.SongDataProvider
@@ -17,9 +16,8 @@ class SongListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_song_list)
-        val allSongs: List<Song> = SongDataProvider.getAllSongs()
+        var allSongs: List<Song> = SongDataProvider.getAllSongs()
         val songAdapter = SongAdapter(allSongs)
-        rvSongs.adapter = songAdapter
 
         // Clicking on a song will change the name on the mini player
         songAdapter.onSongClickListener = {song ->
@@ -29,14 +27,14 @@ class SongListActivity : AppCompatActivity() {
         }
         // Long clicking on a song will delete it
         // Triggers index out of bounds in SongDiffCallback -> areContentsTheSame
-        songAdapter.onSongLongClickListener = {song, pos ->
-            var newSongs = allSongs.toMutableList()
-            newSongs = newSongs.apply {
-                removeAt(0)
-            }
-            songAdapter.change(newSongs.toList())
+        songAdapter.onSongLongClickListener = {song ->
             val toastText = getString(R.string.song_artist, song.title, song.artist) + "deleted"
             Toast.makeText(this, toastText, Toast.LENGTH_SHORT)
+            val mutableListOfSongs = allSongs.toMutableList()
+            songAdapter.change(mutableListOfSongs.apply {
+                remove(song)
+            })
+            allSongs = mutableListOfSongs.toList()
             Unit
         }
         // Clicking shuffle button will shuffle order of list
@@ -54,7 +52,7 @@ class SongListActivity : AppCompatActivity() {
                 intent.putExtra("SONG_KEY", clickedSong)
                 startActivity(intent)
             }
-
         }
+        rvSongs.adapter = songAdapter
     }
 }

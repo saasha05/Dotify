@@ -179,5 +179,7 @@
         android:background="@null"
         android:foreground="?selectableItemBackground"
         android:onClick="nextTrack"
-        android:contentDescription="@string/nextDescr"/>
+        android:contentDescription="@string/nextDescr"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

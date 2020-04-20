@@ -1,6 +1,5 @@
 package com.saashm.dotify
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,7 @@ import com.ericchee.songdataprovider.Song
 class SongAdapter(listOfSongs: List<Song>): RecyclerView.Adapter<SongAdapter.SongViewHolder>() {
     private var listOfSongs: List<Song> = listOfSongs.toList()
     var onSongClickListener: ((song: Song) -> Unit?)? = null
-    var onSongLongClickListener: ((song:Song, pos: Int) -> Unit?)? = null
+    var onSongLongClickListener: ((song:Song) -> Unit?)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_song, parent, false)
         return SongViewHolder(view)
@@ -23,7 +22,7 @@ class SongAdapter(listOfSongs: List<Song>): RecyclerView.Adapter<SongAdapter.Son
 
     override fun onBindViewHolder(holder: SongViewHolder, position: Int) {
         val currSong = listOfSongs[position]
-        holder.bind(currSong, position)
+        holder.bind(currSong)
 
     }
 
@@ -38,7 +37,7 @@ class SongAdapter(listOfSongs: List<Song>): RecyclerView.Adapter<SongAdapter.Son
         private val tvSongName by lazy {itemView.findViewById<TextView>(R.id.tvSongName)}
         private val tvArtistName by lazy {itemView.findViewById<TextView>(R.id.tvArtistName)}
         private val ivSongImage by lazy {itemView.findViewById<ImageView>(R.id.ivSongImage)}
-        fun bind(song: Song, pos: Int) {
+        fun bind(song: Song) {
             tvSongName.text = song.title
             tvArtistName.text = song.artist
             ivSongImage.setImageResource(song.smallImageID)
@@ -49,7 +48,7 @@ class SongAdapter(listOfSongs: List<Song>): RecyclerView.Adapter<SongAdapter.Son
             }
 
             itemView.setOnLongClickListener{
-                onSongLongClickListener?.invoke(song, pos)
+                onSongLongClickListener?.invoke(song)
                 true
             }
         }

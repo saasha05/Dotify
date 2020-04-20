@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
            changeTextColor()
             true
         }
-        // Setting data on the basis of other screen
+        // Setting data on the basis of Song List screen
         val currSong = intent.getParcelableExtra<Song>(SONG_KEY)
         if(currSong != null) {
             tvSongTitle.text = currSong.title
@@ -76,6 +76,7 @@ class MainActivity : AppCompatActivity() {
             llApplyUserContainer.visibility = View.INVISIBLE
         }
     }
+
     private fun changeTvColor(color: Int) {
         tvUsername.setTextColor(ContextCompat.getColor(this, color))
         tvSongTitle.setTextColor(ContextCompat.getColor(this, color))
