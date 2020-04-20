@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.ericchee.songdataprovider.Song
+import com.saashm.dotify.SongListActivity.Companion.SONG_KEY
 import kotlinx.android.synthetic.main.activity_main.*
-//import kotlinx.android.synthetic.main.linear_layout.*
+
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +23,11 @@ class MainActivity : AppCompatActivity() {
            changeTextColor()
             true
         }
+        // Setting data on the basis of other screen
+        val currSong = intent.getParcelableExtra<Song>(SONG_KEY)
+        tvSongTitle.text = currSong.title
+        tvArtistInfo.text = currSong.artist
+        ibAlbumCover.setImageResource(currSong.largeImageID)
     }
 
     fun iteratePlays(view: View) {
