@@ -1,5 +1,6 @@
 package com.saashm.dotify
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -25,9 +26,24 @@ class MainActivity : AppCompatActivity() {
         }
         // Setting data on the basis of other screen
         val currSong = intent.getParcelableExtra<Song>(SONG_KEY)
-        tvSongTitle.text = currSong.title
-        tvArtistInfo.text = currSong.artist
-        ibAlbumCover.setImageResource(currSong.largeImageID)
+        if(currSong != null) {
+            tvSongTitle.text = currSong.title
+            tvArtistInfo.text = currSong.artist
+            ibAlbumCover.setImageResource(currSong.largeImageID)
+        }
+        // Implement back button
+        val actionBar = supportActionBar
+        actionBar!!.title = "Dotify"
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        actionBar.setDisplayHomeAsUpEnabled(true)
+    }
+
+    // When back button is pressed, goes back to SongList
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        val intent = Intent(this, SongListActivity::class.java)
+        startActivity(intent)
+        return true
     }
 
     fun iteratePlays(view: View) {
