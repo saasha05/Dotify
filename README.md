@@ -16,8 +16,8 @@ This app has the following features
 I have completed extra credit #1, #2 and #3
 
 ## Screenshots
-![](imgs/Screenshot1.png)
-![](imgs/Screenshot2.png)
+<img src="imgs/Screenshot1.png" alt="Screenshot of songs list" height="500" />
+<img src="imgs/Screenshot2.png" alt="Screenshot of music player" height="500" />
 
 ## Installation & Usage
 N/A
