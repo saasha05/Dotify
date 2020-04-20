@@ -20,13 +20,11 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="471a313f-47d7-4246-b9ca-ff86eb0c9a3f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/SongAdapter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_song.xml" afterDir="false" />
+    <list default="true" id="471a313f-47d7-4246-b9ca-ff86eb0c9a3f" name="Default Changelist" comment="List renders">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/SongListActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/SongListActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/SongAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/SongAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_song_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_song_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_song.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_song.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -305,7 +303,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587314134666</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="basic stuff">
+      <created>1587363421481</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1587363421481</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -334,6 +339,8 @@
     <MESSAGE value="readme screenshot added" />
     <MESSAGE value="gradle additions" />
     <MESSAGE value="gradle stupid mistake fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="gradle stupid mistake fixed" />
+    <MESSAGE value="basic stuff" />
+    <MESSAGE value="List renders" />
+    <option name="LAST_COMMIT_MESSAGE" value="List renders" />
   </component>
 </project>
