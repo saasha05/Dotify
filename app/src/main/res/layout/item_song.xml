@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="12dp">
+    android:padding="12dp"
+    android:foreground="?selectableItemBackground">
 
     <ImageView
         android:id="@+id/ivSongImage"
@@ -25,6 +26,7 @@
         app:layout_constraintBottom_toTopOf="@id/tvArtistName"
         android:layout_marginLeft="16dp"
         android:textSize="18sp"
+        android:fontFamily="sans-serif"
         />
     <TextView
         android:id="@+id/tvArtistName"

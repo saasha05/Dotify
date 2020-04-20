@@ -14,5 +14,16 @@ class SongListActivity : AppCompatActivity() {
         val allSongs: List<Song> = SongDataProvider.getAllSongs()
         val songAdapter = SongAdapter(allSongs)
         rvSongs.adapter = songAdapter
+
+        // Clicking on a song will change the name on the mini player
+        songAdapter.onSongClickListener = {song ->
+            tvCurrSong.text = getString(R.string.song_artist, song.title, song.artist)
+            Unit
+        }
+        // Clicking shuffle button will shuffle order of list
+        btnShuffle.setOnClickListener {
+            val newSongs = allSongs.shuffled()
+            songAdapter.change(newSongs)
+        }
     }
 }

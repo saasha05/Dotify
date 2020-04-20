@@ -1,6 +1,5 @@
 package com.saashm.dotify
 
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -62,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
     }
     private fun changeTextColor() {
-        val colors = listOf(R.color.purple, R.color.darkBlue, R.color.green, R.color.neonBlue, R.color.orange, R.color.red)
+        val colors = listOf(R.color.primaryColor, R.color.variant1, R.color.green, R.color.neonBlue, R.color.orange, R.color.red)
         changeTvColor(colors[Random.nextInt(1, 6)])
 
 
