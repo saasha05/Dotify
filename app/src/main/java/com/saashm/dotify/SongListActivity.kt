@@ -28,8 +28,8 @@ class SongListActivity : AppCompatActivity() {
         // Long clicking on a song will delete it
         // Triggers index out of bounds in SongDiffCallback -> areContentsTheSame
         songAdapter.onSongLongClickListener = {song ->
-            val toastText = getString(R.string.song_artist, song.title, song.artist) + "deleted"
-            Toast.makeText(this, toastText, Toast.LENGTH_SHORT)
+            val toastText = getString(R.string.song_artist, song.title, song.artist) + " deleted"
+            Toast.makeText(this, toastText, Toast.LENGTH_SHORT).show()
             val mutableListOfSongs = allSongs.toMutableList()
             songAdapter.change(mutableListOfSongs.apply {
                 remove(song)
