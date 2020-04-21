@@ -8,4 +8,7 @@
     <color name="orange">#f9690e</color>
     <color name="red">#f03434</color>
     <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="SpotifyGreen">#1DB954</color>
+    <color name="darkGrey">#535353</color>
 </resources>
