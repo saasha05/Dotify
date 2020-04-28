@@ -11,6 +11,7 @@ import com.ericchee.songdataprovider.SongDataProvider
 import com.saashm.dotify.OnSongClickListener
 import com.saashm.dotify.R
 import com.saashm.dotify.SongAdapter
+import com.saashm.dotify.fragments.NowPlayingFragment.Companion.ARG_SONG
 import kotlinx.android.synthetic.main.activity_song_list.*
 
 class SongListFragment: Fragment() {
@@ -21,10 +22,9 @@ class SongListFragment: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // get list of songs
-//        arguments?.let { args ->
-//            this.songList = args.getParcelable()
-//        }
-        songList = SongDataProvider.getAllSongs()
+        arguments?.let { args ->
+            this.songList = args.getParcelableArrayList<Song>(ARG_SONG)!!.toList()
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -48,9 +48,9 @@ class SongListFragment: Fragment() {
         var allSongs: List<Song> = SongDataProvider.getAllSongs()
         songAdapter = SongAdapter(allSongs)
         rvSongs.adapter = songAdapter
-
+        // to change mini player text
         songAdapter.onSongClickListener = { song ->
-            OnSongClickListener.onSongClicked(song)
+            onSongClickListener?.onSongClicked(song)
         }
     }
     fun shuffleList() {
