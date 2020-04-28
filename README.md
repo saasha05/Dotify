@@ -12,12 +12,13 @@ This app has the following features
 - Click the play button to increase number of plays
 - Long press image to change all text colors
 
+It uses Fragments and the wonders of the Activity Lifecycle to make it run smoothly
+
 ## Extra credit
-I have completed extra credit #1, #2 and #3
+No Extra Credit present
 
 ## Screenshots
-<img src="imgs/Screenshot1.png" alt="Screenshot of songs list" height="500" />
-<img src="imgs/Screenshot2.png" alt="Screenshot of music player" height="500" />
+<img src="" alt="Screenshot of songs list" height="500" />
 
 ## Installation & Usage
 N/A
