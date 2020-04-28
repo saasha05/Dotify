@@ -8,13 +8,15 @@ import com.ericchee.songdataprovider.Song
 import com.ericchee.songdataprovider.SongDataProvider
 import com.saashm.dotify.R
 import com.saashm.dotify.SongAdapter
+import kotlinx.android.synthetic.main.activity_fragment_container.*
 import kotlinx.android.synthetic.main.activity_song_list.*
 
 class SongListActivity : AppCompatActivity() {
     companion object {
         const val SONG_KEY = "SONG_KEY"
     }
-    var clickedSong: Song? = null
+
+    private var clickedSong: Song? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_song_list)

@@ -91,7 +91,6 @@ class NowPlayingFragment: Fragment() {
         llApplyUserContainer.visibility = View.VISIBLE
 
     }
-
     private fun applyUser(view: View) {
         val newUsername = etUsername.text.toString()
         if(newUsername.trim().isEmpty()) {
