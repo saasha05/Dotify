@@ -1,4 +1,4 @@
-package com.saashm.dotify
+package com.saashm.dotify.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,7 +7,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.ericchee.songdataprovider.Song
-import com.saashm.dotify.SongListActivity.Companion.SONG_KEY
+import com.saashm.dotify.R
+import com.saashm.dotify.activities.SongListActivity.Companion.SONG_KEY
 import kotlinx.android.synthetic.main.activity_main.*
 
 import kotlin.random.Random
@@ -85,7 +86,14 @@ class MainActivity : AppCompatActivity() {
 
     }
     private fun changeTextColor() {
-        val colors = listOf(R.color.primaryColor, R.color.variant1, R.color.green, R.color.neonBlue, R.color.orange, R.color.red)
+        val colors = listOf(
+            R.color.primaryColor,
+            R.color.variant1,
+            R.color.green,
+            R.color.neonBlue,
+            R.color.orange,
+            R.color.red
+        )
         changeTvColor(colors[Random.nextInt(1, 6)])
 
 

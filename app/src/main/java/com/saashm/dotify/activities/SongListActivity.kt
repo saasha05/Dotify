@@ -1,4 +1,4 @@
-package com.saashm.dotify
+package com.saashm.dotify.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.widget.Toast
 import com.ericchee.songdataprovider.Song
 import com.ericchee.songdataprovider.SongDataProvider
+import com.saashm.dotify.R
+import com.saashm.dotify.SongAdapter
 import kotlinx.android.synthetic.main.activity_song_list.*
 
 class SongListActivity : AppCompatActivity() {
@@ -38,6 +40,7 @@ class SongListActivity : AppCompatActivity() {
             allSongs = mutableListOfSongs.toList()
             Unit
         }
+        // Mini player stuff
         // Clicking shuffle button will shuffle order of list
         btnShuffle.setOnClickListener {
             val newSongs = allSongs.shuffled()
