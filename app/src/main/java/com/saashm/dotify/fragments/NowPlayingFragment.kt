@@ -17,6 +17,7 @@ class NowPlayingFragment: Fragment() {
     private var num by Delegates.notNull<Int>()
 
     companion object {
+        val TAG: String = NowPlayingFragment::class.java.simpleName
         const val ARG_SONG = "arg_song"
     }
 
@@ -66,10 +67,12 @@ class NowPlayingFragment: Fragment() {
 
     }
 
-    fun updateSong(song: Song) {
-        tvSongTitle.text = song.title
-        tvArtistInfo.text = song.artist
-        ibAlbumCover.setImageResource(song.largeImageID)
+    fun updateSong(song: Song?) {
+        if(song != null) {
+            tvSongTitle.text = song.title
+            tvArtistInfo.text = song.artist
+            ibAlbumCover.setImageResource(song.largeImageID)
+        }
     }
     // Private functions
     private fun iteratePlays(view: View) {

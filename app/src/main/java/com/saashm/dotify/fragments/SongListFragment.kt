@@ -12,13 +12,16 @@ import com.saashm.dotify.OnSongClickListener
 import com.saashm.dotify.R
 import com.saashm.dotify.SongAdapter
 import com.saashm.dotify.fragments.NowPlayingFragment.Companion.ARG_SONG
+import kotlinx.android.synthetic.main.activity_fragment_container.*
 import kotlinx.android.synthetic.main.activity_song_list.*
 
 class SongListFragment: Fragment() {
     private lateinit var songAdapter: SongAdapter
     private var onSongClickListener: OnSongClickListener? = null
     private lateinit var songList: List<Song>
-
+    companion object {
+        val TAG: String = SongListFragment::class.java.simpleName
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // get list of songs
@@ -53,6 +56,7 @@ class SongListFragment: Fragment() {
             onSongClickListener?.onSongClicked(song)
         }
     }
+
     fun shuffleList() {
         val newSongs = songList.shuffled()
         songAdapter.change(newSongs)

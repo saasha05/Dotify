@@ -7,9 +7,9 @@ import com.ericchee.songdataprovider.Song
 import com.ericchee.songdataprovider.SongDataProvider
 import com.saashm.dotify.OnSongClickListener
 import com.saashm.dotify.R
-import com.saashm.dotify.SongAdapter
 import com.saashm.dotify.fragments.NowPlayingFragment
 import com.saashm.dotify.fragments.NowPlayingFragment.Companion.ARG_SONG
+import com.saashm.dotify.fragments.NowPlayingFragment.Companion.TAG
 import com.saashm.dotify.fragments.SongListFragment
 import kotlinx.android.synthetic.main.activity_fragment_container.*
 
@@ -27,7 +27,7 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
         songListFragment.arguments = allSongsBundle
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.fragContainer, songListFragment)
+            .add(R.id.fragContainer, songListFragment, SongListFragment.TAG)
             .commit()
 
         miniPlayer.setOnClickListener {
@@ -39,25 +39,57 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
         btnShuffle.setOnClickListener {
             songListFragment.shuffleList()
         }
-    }
-    private fun showNowPlaying(song: Song?) {
-        // Add Now playing fragment with selected song
-        val nowPlayingFragment = NowPlayingFragment()
-        val argumentBundle = Bundle().apply {
-            putParcelable(ARG_SONG, song)
+        supportFragmentManager.addOnBackStackChangedListener {
+            val hasBackStack = supportFragmentManager.backStackEntryCount > 0
+            if(hasBackStack) {
+                supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            } else {
+                supportActionBar?.setDisplayHomeAsUpEnabled(false)
+            }
         }
-        nowPlayingFragment.arguments = argumentBundle
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.fragContainer, nowPlayingFragment)
-            .commit()
-        // If it already exists then update song?
-
     }
-
     override fun onSongClicked(song: Song) {
         tvCurrSong.text = getString(R.string.song_artist, song.title, song.artist)
         clickedSong = song
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        supportFragmentManager.popBackStack()
+        // lazy way of getting mini player back
+        miniPlayer.visibility = View.VISIBLE
+        return super.onNavigateUp()
+    }
+
+    override fun onBackPressed() {
+        // lazy way of getting mini player back
+        miniPlayer.visibility = View.VISIBLE
+        super.onBackPressed()
+    }
+    private fun getNowPlayingFragment() = supportFragmentManager.findFragmentByTag(NowPlayingFragment.TAG) as? NowPlayingFragment
+    private fun showNowPlaying(song: Song?) {
+        // Add Now playing fragment with selected song
+        var nowPlayingFragment = getNowPlayingFragment()
+        if(nowPlayingFragment == null) {
+            nowPlayingFragment = NowPlayingFragment()
+            val argumentBundle = Bundle().apply {
+                putParcelable(ARG_SONG, song)
+            }
+            nowPlayingFragment.arguments = argumentBundle
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.fragContainer, nowPlayingFragment, NowPlayingFragment.TAG)
+                .addToBackStack(TAG)
+                .commit()
+        } else {
+            // If it already exists then update song
+            nowPlayingFragment.updateSong(song)
+
+        }
+
+
+
+    }
+
+
 
 }
