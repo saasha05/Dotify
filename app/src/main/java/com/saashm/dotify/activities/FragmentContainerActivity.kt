@@ -8,10 +8,12 @@ import com.ericchee.songdataprovider.SongDataProvider
 import com.saashm.dotify.OnSongClickListener
 import com.saashm.dotify.R
 import com.saashm.dotify.fragments.NowPlayingFragment
+import com.saashm.dotify.fragments.NowPlayingFragment.Companion.ARG_COUNT
 import com.saashm.dotify.fragments.NowPlayingFragment.Companion.ARG_SONG
 import com.saashm.dotify.fragments.NowPlayingFragment.Companion.TAG
 import com.saashm.dotify.fragments.SongListFragment
 import kotlinx.android.synthetic.main.activity_fragment_container.*
+import kotlin.random.Random
 
 class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
     private var clickedSong: Song? = null
@@ -73,6 +75,7 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
             nowPlayingFragment = NowPlayingFragment()
             val argumentBundle = Bundle().apply {
                 putParcelable(ARG_SONG, song)
+                putInt(ARG_COUNT, Random.nextInt(1000, 99999))
             }
             nowPlayingFragment.arguments = argumentBundle
             supportFragmentManager

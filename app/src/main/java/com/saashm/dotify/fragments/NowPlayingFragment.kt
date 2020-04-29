@@ -13,23 +13,24 @@ import kotlin.properties.Delegates
 import kotlin.random.Random
 
 class NowPlayingFragment: Fragment() {
-    private var currSong: Song? = null
+    private lateinit var currSong: Song
     private var num by Delegates.notNull<Int>()
 
     companion object {
         val TAG: String = NowPlayingFragment::class.java.simpleName
         const val ARG_SONG = "arg_song"
+        const val ARG_COUNT = "arg_count"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Get current song from arguments
-        num = Random.nextInt(1000, 99999)
         arguments?.let { args ->
             val song = args.getParcelable<Song>(ARG_SONG)
             if (song != null) {
                 this.currSong = song
             }
+            this.num = args.getInt(ARG_COUNT)
         }
     }
     override fun onCreateView(
@@ -66,12 +67,12 @@ class NowPlayingFragment: Fragment() {
         }
 
     }
-
     fun updateSong(song: Song?) {
         if(song != null) {
             tvSongTitle.text = song.title
             tvArtistInfo.text = song.artist
             ibAlbumCover.setImageResource(song.largeImageID)
+            currSong = song
         }
     }
     // Private functions
