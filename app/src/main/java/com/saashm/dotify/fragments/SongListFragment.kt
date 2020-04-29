@@ -2,6 +2,7 @@ package com.saashm.dotify.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,30 +26,9 @@ class SongListFragment: Fragment() {
     }
     override fun onAttach(context: Context) {
         super.onAttach(context)
-
         if (context is OnSongClickListener) {
             onSongClickListener = context
         }
-    }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (savedInstanceState != null) {
-            with(savedInstanceState) {
-                val newList = getParcelableArrayList<Song>(ARG_SONG_LIST)
-                newList?.let {
-                    songList = newList.toList()
-                }
-            }
-        } else {
-            arguments?.let { args ->
-                val newList = args.getParcelableArrayList<Song>(ARG_SONG_LIST)
-                newList?.let {
-                    songList = newList.toList()
-                    songList
-                }
-            }
-        }
-
     }
 
     override fun onCreateView(
@@ -56,6 +36,15 @@ class SongListFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        if (savedInstanceState != null) {
+            with(savedInstanceState) {
+                songList = getParcelableArrayList<Song>(ARG_SONG_LIST) as List<Song>
+            }
+        } else {
+            arguments?.let { args ->
+                songList = args.getParcelableArrayList<Song>(ARG_SONG_LIST) as List<Song>
+            }
+        }
         return layoutInflater.inflate(R.layout.activity_song_list, container, false)
     }
 
@@ -79,6 +68,6 @@ class SongListFragment: Fragment() {
         val newSongs = songList.shuffled()
         songAdapter.change(newSongs)
         songList = newSongs
-        return newSongs
+        return songList
     }
 }

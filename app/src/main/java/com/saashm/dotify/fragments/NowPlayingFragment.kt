@@ -95,21 +95,7 @@ class NowPlayingFragment: Fragment() {
     private fun skippingToast(direction: String) {
         Toast.makeText(context, "Skipping to $direction track", Toast.LENGTH_SHORT).show()
     }
-    private fun changeUser() {
-        llChangeUserContainer.visibility = View.GONE
-        llApplyUserContainer.visibility = View.VISIBLE
 
-    }
-    private fun applyUser() {
-        val newUsername = etUsername.text.toString()
-        if(newUsername.trim().isEmpty()) {
-            Toast.makeText(context, "Please enter a username", Toast.LENGTH_SHORT).show()
-        } else {
-            tvUsername.text = newUsername
-            llChangeUserContainer.visibility = View.VISIBLE
-            llApplyUserContainer.visibility = View.INVISIBLE
-        }
-    }
     private fun setOnClickListeners() {
         btnPlay.setOnClickListener {
             iteratePlays()
@@ -119,12 +105,6 @@ class NowPlayingFragment: Fragment() {
         }
         btnPrev.setOnClickListener {
             prevTrack()
-        }
-        btnChangeUser.setOnClickListener {
-            changeUser()
-        }
-        btnApplyUser.setOnClickListener {
-            applyUser()
         }
     }
 }

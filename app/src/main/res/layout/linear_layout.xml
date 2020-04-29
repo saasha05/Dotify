@@ -1,17 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/global_padding"
-    android:orientation="vertical">
-
-    <LinearLayout
-        android:id="@+id/llChangeUserContainer"
-        android:layout_width="match_parent"
+    android:padding="@dimen/global_padding"
+    android:background="@drawable/black_gradient">
+    <!-- Layout that displays user name and has option to change it-->
+    <LinearLayout android:id="@+id/llChangeUserContainer"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:orientation="horizontal"
         android:visibility="visible"
-        android:layout_gravity="top">
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <TextView
             android:id="@+id/tvUsername"
@@ -32,125 +37,49 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="changeUser"
-            android:text="@string/BtnChangeUser" />
+            android:text="@string/BtnChangeUser"
+            android:background="@color/SpotifyGreen"
+            android:fontFamily="sans-serif-medium" />
     </LinearLayout>
 
-    <!--Layout that allows user to enter username and display it-->
+        <!--Layout that allows user to enter username and display it-->
     <LinearLayout
-        android:id="@+id/llApplyUserContainer"
-        android:layout_width="match_parent"
+    android:id="@+id/llApplyUserContainer"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:orientation="horizontal"
+    android:visibility="invisible"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        android:layout_gravity="top">
-
-        <EditText
-            android:id="@+id/etUsername"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="@dimen/medium_text"
-            android:inputType="text"
-            android:hint="@string/etUsernameHint"
-            android:importantForAutofill="no" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/btnApplyUser"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="applyUser"
-            android:text="@string/BtnApply" />
-    </LinearLayout>
-    <!-- Song Cover image-->
-    <ImageButton
-        android:id="@+id/ibAlbumCover"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:background="@null"
-        android:foreground="?selectableItemBackground"
-        android:longClickable="true"
-        android:paddingTop="10dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/song_cover"
-        android:contentDescription="@string/coverImgDescr"
-
+        android:layout_weight="1"
+        android:hint="@string/etUsernameHint"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:textSize="@dimen/medium_text"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/white"
         />
-    <!-- Song Information-->
-    <TextView
-        android:id="@+id/tvSongTitle"
-        android:layout_width="wrap_content"
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/btnApplyUser"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/medium_spacing"
-        android:text="@string/default_song_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="@dimen/large_text" />
-
-    <TextView
-        android:id="@+id/tvArtistInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:text="@string/default_artist"
-        android:textAlignment="center"
-        android:textSize="@dimen/medium_text" />
-
-    <TextView
-        android:id="@+id/tvNumPlays"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/medium_spacing"
-        android:paddingBottom="@dimen/medium_spacing"
-        android:textAlignment="center"
-        android:textSize="@dimen/medium_text" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical">
-
-        <!-- Layout for play, previous and next buttons-->
-        <ImageButton
-            android:id="@+id/btnPrev"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:background="@null"
-            android:foreground="?selectableItemBackground"
-            android:onClick="prevTrack"
-            android:src="@drawable/ic_previous"
-            android:contentDescription="@string/prevDescr"/>
-
-        <ImageButton
-            android:id="@+id/btnPlay"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@null"
-            android:foreground="?selectableItemBackground"
-            android:onClick="iteratePlays"
-            android:src="@drawable/ic_play"
-            android:contentDescription="@string/playDescr"/>
-
-        <ImageButton
-            android:id="@+id/btnNext"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:background="@null"
-            android:foreground="?selectableItemBackground"
-            android:onClick="nextTrack"
-            android:src="@drawable/ic_next"
-            android:contentDescription="@string/nextDescr"/>
+        android:layout_weight="1"
+        android:onClick="applyUser"
+        android:text="@string/BtnApply"
+        android:background="@color/SpotifyGreen"
+        android:fontFamily="sans-serif-medium"/>
     </LinearLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

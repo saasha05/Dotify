@@ -18,17 +18,22 @@
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CUSTOM_FILTER" value="saashm" />
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="info" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="471a313f-47d7-4246-b9ca-ff86eb0c9a3f" name="Default Changelist" comment="changes + new layout">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout-land/activity_main.xml" afterDir="false" />
+    <list default="true" id="471a313f-47d7-4246-b9ca-ff86eb0c9a3f" name="Default Changelist" comment="landscape layout added + cleanup">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/activities/FragmentContainerActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/activities/FragmentContainerActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/activities/MainActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/activities/SongListActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/fragments/NowPlayingFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/fragments/NowPlayingFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/fragments/SongListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/fragments/SongListFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout-land/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout-land/activity_main.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_song_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_song_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/linear_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/linear_layout.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -474,7 +479,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588193310651</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="changes + new layout">
+      <created>1588198189860</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1588198189860</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -491,7 +503,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="update readme, finished everything" />
     <MESSAGE value="Final changes" />
     <MESSAGE value="readme screenshot added" />
     <MESSAGE value="gradle additions" />
@@ -516,22 +527,7 @@
     <MESSAGE value="Rotation is a bitch" />
     <MESSAGE value="it works wohoo" />
     <MESSAGE value="changes + new layout" />
-    <option name="LAST_COMMIT_MESSAGE" value="changes + new layout" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/activities/FragmentContainerActivity.kt</url>
-          <line>33</line>
-          <option name="timeStamp" value="57" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/activities/FragmentContainerActivity.kt</url>
-          <line>35</line>
-          <option name="timeStamp" value="58" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="landscape layout added + cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="landscape layout added + cleanup" />
   </component>
 </project>
