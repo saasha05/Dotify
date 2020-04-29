@@ -13,12 +13,13 @@ import com.saashm.dotify.fragments.NowPlayingFragment.Companion.ARG_SONG
 import com.saashm.dotify.fragments.NowPlayingFragment.Companion.TAG
 import com.saashm.dotify.fragments.SongListFragment
 import kotlinx.android.synthetic.main.activity_fragment_container.*
+import kotlinx.android.synthetic.main.activity_song_list.*
 import kotlin.random.Random
 
 class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
     private var clickedSong: Song? = null
     private val ARG_CURR_SONG: String = "arg_curr_song"
-    private val IF_NOWPL: String = "arg_if_now_playing_present"
+    private val ARG_SONG_LIST = "arg_song_list"
     private lateinit var songList: List<Song>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +30,10 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
                 clickedSong = getParcelable(ARG_CURR_SONG)
                 clickedSong?.let {
                     onSongClicked(it)
+                }
+                val newList = getParcelableArrayList<Song>(ARG_SONG_LIST)
+                newList?.let {
+                    songList = newList.toList()
                 }
             }
         } else {
@@ -50,7 +55,7 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putParcelable(ARG_CURR_SONG, clickedSong)
-        outState.putBoolean(IF_NOWPL, getNowPlayingFragment() != null)
+        outState.putParcelableArrayList(ARG_SONG_LIST, ArrayList(songList))
     }
     private fun getNowPlayingFragment() = supportFragmentManager.findFragmentByTag(TAG) as? NowPlayingFragment
     private fun showNowPlaying() {
@@ -87,7 +92,7 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
     private fun getBundleSongList(songList: List<Song>): Bundle {
         val allSongsBundle = Bundle().apply {
             val list = ArrayList(songList)
-            putParcelableArrayList(ARG_SONG, list)
+            putParcelableArrayList(ARG_SONG_LIST, list)
         }
         return (allSongsBundle)
     }
@@ -100,6 +105,7 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
         }
         btnShuffle.setOnClickListener {
             songListFragment.shuffleList()
+            rvSongs.smoothScrollToPosition(0)
         }
         // to show back button based on stack
         supportFragmentManager.addOnBackStackChangedListener {

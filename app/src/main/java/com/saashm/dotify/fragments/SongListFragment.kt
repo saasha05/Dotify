@@ -34,11 +34,18 @@ class SongListFragment: Fragment() {
         super.onCreate(savedInstanceState)
         if (savedInstanceState != null) {
             with(savedInstanceState) {
-                songList = getParcelableArrayList<Song>(ARG_SONG_LIST)!!.toList()
+                val newList = getParcelableArrayList<Song>(ARG_SONG_LIST)
+                newList?.let {
+                    songList = newList.toList()
+                }
             }
         } else {
             arguments?.let { args ->
-                songList = args.getParcelableArrayList<Song>(ARG_SONG)!!.toList()
+                val newList = args.getParcelableArrayList<Song>(ARG_SONG_LIST)
+                newList?.let {
+                    songList = newList.toList()
+                    songList
+                }
             }
         }
 
@@ -67,9 +74,11 @@ class SongListFragment: Fragment() {
         outState.putParcelableArrayList(ARG_SONG_LIST, ArrayList(songList))
         super.onSaveInstanceState(outState)
     }
-    fun shuffleList() {
+
+    fun shuffleList(): List<Song> {
         val newSongs = songList.shuffled()
         songAdapter.change(newSongs)
         songList = newSongs
+        return newSongs
     }
 }
