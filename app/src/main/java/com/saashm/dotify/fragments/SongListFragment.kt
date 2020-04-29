@@ -40,10 +40,9 @@ class SongListFragment: Fragment() {
             with(savedInstanceState) {
                 songList = getParcelableArrayList<Song>(ARG_SONG_LIST) as List<Song>
             }
-        } else {
-            arguments?.let { args ->
-                songList = args.getParcelableArrayList<Song>(ARG_SONG_LIST) as List<Song>
-            }
+        }
+        arguments?.let { args ->
+            songList = args.getParcelableArrayList<Song>(ARG_SONG_LIST) as List<Song>
         }
         return layoutInflater.inflate(R.layout.activity_song_list, container, false)
     }
