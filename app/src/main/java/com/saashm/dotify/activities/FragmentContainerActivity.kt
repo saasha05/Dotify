@@ -2,7 +2,6 @@ package com.saashm.dotify.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import com.ericchee.songdataprovider.Song
 import com.ericchee.songdataprovider.SongDataProvider
@@ -19,30 +18,12 @@ import kotlin.random.Random
 class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
     private var clickedSong: Song? = null
     private val ARG_CURR_SONG: String = "arg_curr_song"
-    private val ARG_IF_NOWPL: String = "arg_if_now_playing_present"
+    private val IF_NOWPL: String = "arg_if_now_playing_present"
     private lateinit var songList: List<Song>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fragment_container)
-        // song List fragment always there
-        songList = SongDataProvider.getAllSongs()
         val songListFragment = SongListFragment()
-        val allSongsBundle = getBundleSongList(songList)
-        songListFragment.arguments = allSongsBundle
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.fragContainer, songListFragment, SongListFragment.TAG)
-            .commit()
-        // Add logic to get old songlist
-        val nowPl = getNowPlayingFragment()
-        if(nowPl != null) {
-            // Show the now playing fragment
-            // OR add it to the top of stack
-            Log.i("saashm", "HERE")
-        } else {
-            Log.i("saashm", "NOT HERE")
-        }
-        // If rotated or something get the old mini player stuff
         if (savedInstanceState != null) {
             with(savedInstanceState) {
                 clickedSong = getParcelable(ARG_CURR_SONG)
@@ -50,48 +31,28 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
                     onSongClicked(it)
                 }
             }
+        } else {
+            showSongList(songListFragment)
         }
-        // on click listeners
-        miniPlayer.setOnClickListener {
-            if(clickedSong != null) {
-                miniPlayer.visibility = View.INVISIBLE
-                showNowPlaying()
-            }
-        }
-        btnShuffle.setOnClickListener {
-            songListFragment.shuffleList()
-        }
-        supportFragmentManager.addOnBackStackChangedListener {
-            val hasBackStack = supportFragmentManager.backStackEntryCount > 0
-            if(hasBackStack) {
-                supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            } else {
-                supportActionBar?.setDisplayHomeAsUpEnabled(false)
-            }
-        }
+        checkBackStack()
+        setOnClickListeners(songListFragment)
     }
     override fun onSongClicked(song: Song) {
         tvCurrSong.text = getString(R.string.song_artist, song.title, song.artist)
         clickedSong = song
     }
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putParcelable(ARG_CURR_SONG, clickedSong)
-        outState.putBoolean(ARG_IF_NOWPL, getNowPlayingFragment() != null)
-    }
+
     override fun onSupportNavigateUp(): Boolean {
         supportFragmentManager.popBackStack()
-        // lazy way of getting mini player back
-        miniPlayer.visibility = View.VISIBLE
         return super.onNavigateUp()
     }
 
-    override fun onBackPressed() {
-        // lazy way of getting mini player back
-        miniPlayer.visibility = View.VISIBLE
-        super.onBackPressed()
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelable(ARG_CURR_SONG, clickedSong)
+        outState.putBoolean(IF_NOWPL, getNowPlayingFragment() != null)
     }
-    private fun getNowPlayingFragment() = supportFragmentManager.findFragmentByTag(NowPlayingFragment.TAG) as? NowPlayingFragment
+    private fun getNowPlayingFragment() = supportFragmentManager.findFragmentByTag(TAG) as? NowPlayingFragment
     private fun showNowPlaying() {
         // Add Now playing fragment with selected song
         var nowPlayingFragment = getNowPlayingFragment()
@@ -104,7 +65,7 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
             nowPlayingFragment.arguments = argumentBundle
             supportFragmentManager
                 .beginTransaction()
-                .add(R.id.fragContainer, nowPlayingFragment, NowPlayingFragment.TAG)
+                .add(R.id.fragContainer, nowPlayingFragment, TAG)
                 .addToBackStack(TAG)
                 .commit()
         } else {
@@ -114,6 +75,15 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
         }
 
     }
+    private fun showSongList(songListFragment: SongListFragment) {
+        songList = SongDataProvider.getAllSongs()
+        val allSongsBundle = getBundleSongList(songList)
+        songListFragment.arguments = allSongsBundle
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fragContainer, songListFragment, SongListFragment.TAG)
+            .commit()
+    }
     private fun getBundleSongList(songList: List<Song>): Bundle {
         val allSongsBundle = Bundle().apply {
             val list = ArrayList(songList)
@@ -121,7 +91,32 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
         }
         return (allSongsBundle)
     }
-
-
+    private fun setOnClickListeners(songListFragment: SongListFragment) {
+        miniPlayer.setOnClickListener {
+            if(clickedSong != null) {
+                miniPlayer.visibility = View.INVISIBLE
+                showNowPlaying()
+            }
+        }
+        btnShuffle.setOnClickListener {
+            songListFragment.shuffleList()
+        }
+        // to show back button based on stack
+        supportFragmentManager.addOnBackStackChangedListener {
+            val hasBackStack = supportFragmentManager.backStackEntryCount > 0
+            if(hasBackStack) {
+                supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            } else {
+                supportActionBar?.setDisplayHomeAsUpEnabled(false)
+                miniPlayer.visibility = View.VISIBLE
+            }
+        }
+    }
+    private fun checkBackStack() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            miniPlayer.visibility = View.INVISIBLE
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
+    }
 
 }

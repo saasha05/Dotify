@@ -34,17 +34,16 @@ class NowPlayingFragment: Fragment() {
                 count.let {
                     num = it
                 }
-
             }
         } else {
-            // Get current song from arguments
+            // default behavior
             arguments?.let { args ->
                 val song = args.getParcelable<Song>(ARG_SONG)
                 if (song != null) {
                     this.currSong = song
                 }
                 val count = args.getInt(ARG_COUNT)
-                count?.let {
+                count.let {
                     this.num = it
                 }
 
@@ -64,23 +63,7 @@ class NowPlayingFragment: Fragment() {
         val playContent = "$num plays"
         tvNumPlays.text = playContent
         updateSong(currSong)
-        // on Click Listeners
-        btnPlay.setOnClickListener {
-            iteratePlays(it)
-        }
-        btnNext.setOnClickListener {
-            nextTrack(it)
-        }
-        btnPrev.setOnClickListener {
-            prevTrack(it)
-        }
-        btnChangeUser.setOnClickListener {
-            changeUser(it)
-        }
-        btnApplyUser.setOnClickListener {
-            applyUser(it)
-        }
-
+        setOnClickListeners()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -98,26 +81,26 @@ class NowPlayingFragment: Fragment() {
         }
     }
     // Private functions
-    private fun iteratePlays(view: View) {
-        num += 1;
+    private fun iteratePlays() {
+        num += 1
         val playContent = "$num plays"
         tvNumPlays.text = playContent
     }
-    private fun prevTrack(view: View) {
-        skippingToast(view,"previous")
+    private fun prevTrack() {
+        skippingToast("previous")
     }
-    private fun nextTrack(view: View) {
-        skippingToast(view,"next")
+    private fun nextTrack() {
+        skippingToast("next")
     }
-    private fun skippingToast(view: View, direction: String) {
+    private fun skippingToast(direction: String) {
         Toast.makeText(context, "Skipping to $direction track", Toast.LENGTH_SHORT).show()
     }
-    private fun changeUser(view: View) {
+    private fun changeUser() {
         llChangeUserContainer.visibility = View.GONE
         llApplyUserContainer.visibility = View.VISIBLE
 
     }
-    private fun applyUser(view: View) {
+    private fun applyUser() {
         val newUsername = etUsername.text.toString()
         if(newUsername.trim().isEmpty()) {
             Toast.makeText(context, "Please enter a username", Toast.LENGTH_SHORT).show()
@@ -125,6 +108,23 @@ class NowPlayingFragment: Fragment() {
             tvUsername.text = newUsername
             llChangeUserContainer.visibility = View.VISIBLE
             llApplyUserContainer.visibility = View.INVISIBLE
+        }
+    }
+    private fun setOnClickListeners() {
+        btnPlay.setOnClickListener {
+            iteratePlays()
+        }
+        btnNext.setOnClickListener {
+            nextTrack()
+        }
+        btnPrev.setOnClickListener {
+            prevTrack()
+        }
+        btnChangeUser.setOnClickListener {
+            changeUser()
+        }
+        btnApplyUser.setOnClickListener {
+            applyUser()
         }
     }
 }

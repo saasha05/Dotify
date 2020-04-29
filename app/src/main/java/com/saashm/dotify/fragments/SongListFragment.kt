@@ -20,21 +20,9 @@ class SongListFragment: Fragment() {
     private var onSongClickListener: OnSongClickListener? = null
     private lateinit var songList: List<Song>
     companion object {
-        val ARG_SONG_LIST = "arg_song_list"
+        const val ARG_SONG_LIST = "arg_song_list"
         val TAG: String = SongListFragment::class.java.simpleName
     }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (savedInstanceState != null) {
-            with(savedInstanceState) {
-                songList = getParcelableArrayList<Song>(ARG_SONG_LIST)!!.toList()
-            }
-        }
-        arguments?.let { args ->
-            this.songList = args.getParcelableArrayList<Song>(ARG_SONG)!!.toList()
-        }
-    }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -42,6 +30,20 @@ class SongListFragment: Fragment() {
             onSongClickListener = context
         }
     }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (savedInstanceState != null) {
+            with(savedInstanceState) {
+                songList = getParcelableArrayList<Song>(ARG_SONG_LIST)!!.toList()
+            }
+        } else {
+            arguments?.let { args ->
+                songList = args.getParcelableArrayList<Song>(ARG_SONG)!!.toList()
+            }
+        }
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -53,8 +55,7 @@ class SongListFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var allSongs: List<Song> = SongDataProvider.getAllSongs()
-        songAdapter = SongAdapter(allSongs)
+        songAdapter = SongAdapter(songList)
         rvSongs.adapter = songAdapter
         // to change mini player text when song is clicked
         songAdapter.onSongClickListener = { song ->
@@ -69,5 +70,6 @@ class SongListFragment: Fragment() {
     fun shuffleList() {
         val newSongs = songList.shuffled()
         songAdapter.change(newSongs)
+        songList = newSongs
     }
 }
