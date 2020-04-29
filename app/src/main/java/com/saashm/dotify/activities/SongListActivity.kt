@@ -3,6 +3,7 @@ package com.saashm.dotify.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.widget.Toast
 import com.ericchee.songdataprovider.Song
 import com.ericchee.songdataprovider.SongDataProvider
@@ -61,4 +62,5 @@ class SongListActivity : AppCompatActivity() {
         }
         rvSongs.adapter = songAdapter
     }
+
 }

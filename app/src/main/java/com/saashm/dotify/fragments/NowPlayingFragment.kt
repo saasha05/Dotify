@@ -24,13 +24,31 @@ class NowPlayingFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Get current song from arguments
-        arguments?.let { args ->
-            val song = args.getParcelable<Song>(ARG_SONG)
-            if (song != null) {
-                this.currSong = song
+        if (savedInstanceState != null) {
+            with(savedInstanceState) {
+                val song: Song? = getParcelable(ARG_SONG)
+                val count = getInt(ARG_COUNT)
+                song?.let {
+                    currSong = it
+                }
+                count.let {
+                    num = it
+                }
+
             }
-            this.num = args.getInt(ARG_COUNT)
+        } else {
+            // Get current song from arguments
+            arguments?.let { args ->
+                val song = args.getParcelable<Song>(ARG_SONG)
+                if (song != null) {
+                    this.currSong = song
+                }
+                val count = args.getInt(ARG_COUNT)
+                count?.let {
+                    this.num = it
+                }
+
+            }
         }
     }
     override fun onCreateView(
@@ -45,10 +63,7 @@ class NowPlayingFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val playContent = "$num plays"
         tvNumPlays.text = playContent
-        currSong?.let {
-            updateSong(it)
-        }
-
+        updateSong(currSong)
         // on Click Listeners
         btnPlay.setOnClickListener {
             iteratePlays(it)
@@ -65,6 +80,13 @@ class NowPlayingFragment: Fragment() {
         btnApplyUser.setOnClickListener {
             applyUser(it)
         }
+
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt(ARG_COUNT, num)
+        outState.putParcelable(ARG_SONG, currSong)
+        super.onSaveInstanceState(outState)
 
     }
     fun updateSong(song: Song?) {
@@ -105,8 +127,4 @@ class NowPlayingFragment: Fragment() {
             llApplyUserContainer.visibility = View.INVISIBLE
         }
     }
-
-
-
-
 }

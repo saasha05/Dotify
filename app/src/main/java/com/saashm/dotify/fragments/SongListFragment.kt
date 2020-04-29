@@ -20,11 +20,16 @@ class SongListFragment: Fragment() {
     private var onSongClickListener: OnSongClickListener? = null
     private lateinit var songList: List<Song>
     companion object {
+        val ARG_SONG_LIST = "arg_song_list"
         val TAG: String = SongListFragment::class.java.simpleName
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // get list of songs
+        if (savedInstanceState != null) {
+            with(savedInstanceState) {
+                songList = getParcelableArrayList<Song>(ARG_SONG_LIST)!!.toList()
+            }
+        }
         arguments?.let { args ->
             this.songList = args.getParcelableArrayList<Song>(ARG_SONG)!!.toList()
         }
@@ -51,12 +56,16 @@ class SongListFragment: Fragment() {
         var allSongs: List<Song> = SongDataProvider.getAllSongs()
         songAdapter = SongAdapter(allSongs)
         rvSongs.adapter = songAdapter
-        // to change mini player text
+        // to change mini player text when song is clicked
         songAdapter.onSongClickListener = { song ->
             onSongClickListener?.onSongClicked(song)
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelableArrayList(ARG_SONG_LIST, ArrayList(songList))
+        super.onSaveInstanceState(outState)
+    }
     fun shuffleList() {
         val newSongs = songList.shuffled()
         songAdapter.change(newSongs)
