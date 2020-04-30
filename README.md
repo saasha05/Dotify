@@ -13,11 +13,8 @@ This app has the following features
 Dotify now uses Fragments and the wonders of the Activity Lifecycle to make it run smoothly!
 
 ## Doing me a confuse
-- How do I get the miniPlayer to only show up when the songListFragment is displayed?
-- When app is rotated how do I recreate all the fragments like before?
-- How does the activity know which was the last fragment being displayed?
-- When it displays it does the information come from the activity i.e. is it completely recreated
-or does it come from the fragments saved instance state?
+- App crashing when shuffle is clicked after rotation
+- Do we need a new landscape layout for song list?
 
 ## Extra credit
 No Extra Credit present

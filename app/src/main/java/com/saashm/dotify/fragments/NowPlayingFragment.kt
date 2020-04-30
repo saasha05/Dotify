@@ -42,10 +42,7 @@ class NowPlayingFragment: Fragment() {
                 if (song != null) {
                     this.currSong = song
                 }
-                val count = args.getInt(ARG_COUNT)
-                count.let {
-                    this.num = it
-                }
+                num = Random.nextInt(1000, 99999)
 
             }
         }

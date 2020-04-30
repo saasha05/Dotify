@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_fragment_container.*
 import kotlinx.android.synthetic.main.activity_song_list.*
 
 class SongListFragment: Fragment() {
-    private lateinit var songAdapter: SongAdapter
+    private var songAdapter: SongAdapter? = null
     private var onSongClickListener: OnSongClickListener? = null
     private lateinit var songList: List<Song>
     companion object {
@@ -53,7 +53,7 @@ class SongListFragment: Fragment() {
         songAdapter = SongAdapter(songList)
         rvSongs.adapter = songAdapter
         // to change mini player text when song is clicked
-        songAdapter.onSongClickListener = { song ->
+        songAdapter?.onSongClickListener = { song ->
             onSongClickListener?.onSongClicked(song)
         }
     }
@@ -65,8 +65,17 @@ class SongListFragment: Fragment() {
 
     fun shuffleList(): List<Song> {
         val newSongs = songList.shuffled()
-        songAdapter.change(newSongs)
+        songAdapter?.change(newSongs)
         songList = newSongs
         return songList
     }
+
+    fun updateList(newList: List<Song>) {
+        if(songAdapter != null) {
+            songAdapter!!.change(newList)
+        }
+        songList = newList
+
+    }
+
 }

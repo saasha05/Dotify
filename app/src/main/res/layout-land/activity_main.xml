@@ -10,8 +10,8 @@
     <!-- Song Cover image-->
     <ImageButton
         android:id="@+id/ibAlbumCover"
+        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
         android:background="@null"
         android:contentDescription="@string/coverImgDescr"
         android:foreground="?selectableItemBackground"
@@ -19,12 +19,11 @@
         android:paddingTop="@dimen/medium_spacing"
         android:scaleType="fitXY"
         android:src="@drawable/song_cover"
-        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/verticalGuideline"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/verticalGuideline"

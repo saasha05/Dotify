@@ -8,31 +8,36 @@ import com.ericchee.songdataprovider.SongDataProvider
 import com.saashm.dotify.OnSongClickListener
 import com.saashm.dotify.R
 import com.saashm.dotify.fragments.NowPlayingFragment
-import com.saashm.dotify.fragments.NowPlayingFragment.Companion.ARG_COUNT
 import com.saashm.dotify.fragments.NowPlayingFragment.Companion.ARG_SONG
 import com.saashm.dotify.fragments.NowPlayingFragment.Companion.TAG
 import com.saashm.dotify.fragments.SongListFragment
 import kotlinx.android.synthetic.main.activity_fragment_container.*
 import kotlinx.android.synthetic.main.activity_song_list.*
-import kotlin.random.Random
 
 class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
     private var clickedSong: Song? = null
     private val ARG_CURR_SONG: String = "arg_curr_song"
     private val ARG_SONG_LIST = "arg_song_list"
+    private lateinit var songList: List<Song>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fragment_container)
         val songListFragment = SongListFragment()
-
         if (savedInstanceState != null) {
             with(savedInstanceState) {
                 clickedSong = getParcelable(ARG_CURR_SONG)
                 clickedSong?.let {
                     onSongClicked(it)
                 }
+                var newList = getParcelableArrayList<Song>(ARG_SONG_LIST)
+                newList?.let {
+                    songList = newList.toList()
+                    // give it to songlist?
+                    retainList()
+                }
             }
         } else {
+            songList = SongDataProvider.getAllSongs()
             showSongList(songListFragment)
         }
         checkBackStack()
@@ -51,6 +56,7 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putParcelable(ARG_CURR_SONG, clickedSong)
+        outState.putParcelableArrayList(ARG_SONG_LIST, ArrayList(songList))
     }
     private fun getNowPlayingFragment() = supportFragmentManager.findFragmentByTag(TAG) as? NowPlayingFragment
     private fun showNowPlaying() {
@@ -60,7 +66,6 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
             nowPlayingFragment = NowPlayingFragment()
             val argumentBundle = Bundle().apply {
                 putParcelable(ARG_SONG, clickedSong)
-                putInt(ARG_COUNT, Random.nextInt(1000, 99999))
             }
             nowPlayingFragment.arguments = argumentBundle
             supportFragmentManager
@@ -76,13 +81,21 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
 
     }
     private fun showSongList(songListFragment: SongListFragment) {
-        val songList = SongDataProvider.getAllSongs()
         val allSongsBundle = getBundleSongList(songList)
         songListFragment.arguments = allSongsBundle
         supportFragmentManager
             .beginTransaction()
             .add(R.id.fragContainer, songListFragment, SongListFragment.TAG)
             .commit()
+    }
+    private fun retainList() {
+        //  find the songlistfragment by tag, give it the data through
+        //  some exposed fun like SongListFragment.updateList()
+        //  songlistfragment updates adapter with list from activity
+        val songListFrag = supportFragmentManager.findFragmentByTag(SongListFragment.TAG) as? SongListFragment
+        if(songListFrag != null) {
+            songListFrag.updateList(songList)
+        }
     }
     private fun getBundleSongList(songList: List<Song>): Bundle {
         val allSongsBundle = Bundle().apply {
