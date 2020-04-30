@@ -506,7 +506,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588208835772</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="idek??">
+      <created>1588210841166</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1588210841166</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -523,7 +530,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="gradle stupid mistake fixed" />
     <MESSAGE value="basic stuff" />
     <MESSAGE value="List renders" />
     <MESSAGE value="Part 2 done" />
@@ -548,17 +554,7 @@
     <MESSAGE value="changes" />
     <MESSAGE value="shuffle???" />
     <MESSAGE value="idek" />
-    <option name="LAST_COMMIT_MESSAGE" value="idek" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/fragments/SongListFragment.kt</url>
-          <line>54</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="idek??" />
+    <option name="LAST_COMMIT_MESSAGE" value="idek??" />
   </component>
 </project>

@@ -37,10 +37,12 @@ class SongListFragment: Fragment() {
             with(savedInstanceState) {
                 songList = getParcelableArrayList<Song>(ARG_SONG_LIST) as List<Song>
             }
+        } else {
+            arguments?.let { args ->
+                songList = args.getParcelableArrayList<Song>(ARG_SONG_LIST) as List<Song>
+            }
         }
-        arguments?.let { args ->
-            songList = args.getParcelableArrayList<Song>(ARG_SONG_LIST) as List<Song>
-        }
+
     }
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,22 +63,14 @@ class SongListFragment: Fragment() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putParcelableArrayList(ARG_SONG_LIST, ArrayList(songList))
         super.onSaveInstanceState(outState)
+        outState.putParcelableArrayList(ARG_SONG_LIST, ArrayList(songList))
     }
 
-    fun shuffleList(): List<Song> {
+    fun shuffleList() {
         val newSongs = songList.shuffled()
         songAdapter.change(newSongs)
         songList = newSongs
-        return songList
+        rvSongs.smoothScrollToPosition(0)
     }
-
-//    fun updateList(newList: List<Song>) {
-//        if(::songAdapter.isInitialized) {
-//            songAdapter.change(newList)
-//            songList = newList
-//        }
-//    }
-
 }

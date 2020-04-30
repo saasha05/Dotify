@@ -11,13 +11,12 @@ import com.saashm.dotify.fragments.NowPlayingFragment
 import com.saashm.dotify.fragments.NowPlayingFragment.Companion.ARG_SONG
 import com.saashm.dotify.fragments.NowPlayingFragment.Companion.TAG
 import com.saashm.dotify.fragments.SongListFragment
+import com.saashm.dotify.fragments.SongListFragment.Companion.ARG_SONG_LIST
 import kotlinx.android.synthetic.main.activity_fragment_container.*
-import kotlinx.android.synthetic.main.activity_song_list.*
 
 class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
     private var clickedSong: Song? = null
     private val ARG_CURR_SONG: String = "arg_curr_song"
-    private val ARG_SONG_LIST = "arg_song_list"
     private lateinit var songList: List<Song>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,19 +28,13 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
                 clickedSong?.let {
                     onSongClicked(it)
                 }
-//                var newList = getParcelableArrayList<Song>(ARG_SONG_LIST)
-//                newList?.let {
-//                    songList = newList.toList()
-//                    // give it to songlist?
-//                    retainList(songListFragment)
-//                }
             }
         } else {
             songList = SongDataProvider.getAllSongs()
             showSongList(songListFragment)
         }
         checkBackStack()
-        setOnClickListeners(songListFragment)
+        setOnClickListeners()
     }
     override fun onSongClicked(song: Song) {
         tvCurrSong.text = getString(R.string.song_artist, song.title, song.artist)
@@ -56,7 +49,6 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putParcelable(ARG_CURR_SONG, clickedSong)
-//        outState.putParcelableArrayList(ARG_SONG_LIST, ArrayList(songList))
     }
     private fun getNowPlayingFragment() = supportFragmentManager.findFragmentByTag(TAG) as? NowPlayingFragment
     private fun showNowPlaying() {
@@ -89,15 +81,6 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
             .commit()
     }
 
-//    private fun retainList(songListFragment: SongListFragment) {
-//        //  find the songlistfragment by tag, give it the data through
-//        //  some exposed fun like SongListFragment.updateList()
-//        //  songlistfragment updates adapter with list from activity
-//        val songListFrag = supportFragmentManager.findFragmentByTag(SongListFragment.TAG) as? SongListFragment
-//        if(songListFrag != null) {
-//            songListFragment.updateList(songList)
-//        }
-//    }
     private fun getBundleSongList(songList: List<Song>): Bundle {
         val allSongsBundle = Bundle().apply {
             val list = ArrayList(songList)
@@ -105,7 +88,7 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
         }
         return (allSongsBundle)
     }
-    private fun setOnClickListeners(songListFragment: SongListFragment) {
+    private fun setOnClickListeners() {
         miniPlayer.setOnClickListener {
             if(clickedSong != null) {
                 miniPlayer.visibility = View.INVISIBLE
@@ -113,8 +96,8 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
             }
         }
         btnShuffle.setOnClickListener {
-            songListFragment.shuffleList()
-            rvSongs.smoothScrollToPosition(0)
+            val songListFragment = supportFragmentManager.findFragmentByTag(SongListFragment.TAG) as? SongListFragment
+            songListFragment?.shuffleList()
         }
         // to show back button based on stack
         supportFragmentManager.addOnBackStackChangedListener {
