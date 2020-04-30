@@ -25,9 +25,7 @@
     <list default="true" id="471a313f-47d7-4246-b9ca-ff86eb0c9a3f" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/.idea/markdown-navigator-enh.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/markdown-navigator.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imgs/Screenshot2.png" beforeDir="false" afterPath="$PROJECT_DIR$/imgs/Screenshot2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/imgs/Screenshot3.png" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -522,7 +520,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588212632588</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="readme update">
+      <created>1588213732498</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1588213732498</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -551,7 +556,6 @@
     <MESSAGE value="im boreddd icon update" />
     <MESSAGE value="final changes" />
     <MESSAGE value="Fragments created" />
-    <MESSAGE value="readme update" />
     <MESSAGE value="many errors in Part 1" />
     <MESSAGE value="things kinda work" />
     <MESSAGE value="part 2 kinda done" />
@@ -564,6 +568,7 @@
     <MESSAGE value="idek" />
     <MESSAGE value="idek??" />
     <MESSAGE value="REJOICE" />
-    <option name="LAST_COMMIT_MESSAGE" value="REJOICE" />
+    <MESSAGE value="readme update" />
+    <option name="LAST_COMMIT_MESSAGE" value="readme update" />
   </component>
 </project>
