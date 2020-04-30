@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_fragment_container.*
 import kotlinx.android.synthetic.main.activity_song_list.*
 
 class SongListFragment: Fragment() {
-    private var songAdapter: SongAdapter? = null
+    private lateinit var songAdapter: SongAdapter
     private var onSongClickListener: OnSongClickListener? = null
     private lateinit var songList: List<Song>
     companion object {
@@ -36,11 +36,11 @@ class SongListFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        if (savedInstanceState != null) {
-            with(savedInstanceState) {
-                songList = getParcelableArrayList<Song>(ARG_SONG_LIST) as List<Song>
-            }
-        }
+//        if (savedInstanceState != null) {
+//            with(savedInstanceState) {
+//                songList = getParcelableArrayList<Song>(ARG_SONG_LIST) as List<Song>
+//            }
+//        }
         arguments?.let { args ->
             songList = args.getParcelableArrayList<Song>(ARG_SONG_LIST) as List<Song>
         }
@@ -51,6 +51,9 @@ class SongListFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         songAdapter = SongAdapter(songList)
+//        if(songList != null) {
+//            songAdapter.change(songList)
+//        }
         rvSongs.adapter = songAdapter
         // to change mini player text when song is clicked
         songAdapter?.onSongClickListener = { song ->
@@ -58,10 +61,10 @@ class SongListFragment: Fragment() {
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putParcelableArrayList(ARG_SONG_LIST, ArrayList(songList))
-        super.onSaveInstanceState(outState)
-    }
+//    override fun onSaveInstanceState(outState: Bundle) {
+//        outState.putParcelableArrayList(ARG_SONG_LIST, ArrayList(songList))
+//        super.onSaveInstanceState(outState)
+//    }
 
     fun shuffleList(): List<Song> {
         val newSongs = songList.shuffled()
@@ -71,11 +74,9 @@ class SongListFragment: Fragment() {
     }
 
     fun updateList(newList: List<Song>) {
-        if(songAdapter != null) {
-            songAdapter!!.change(newList)
+        if(::songAdapter.isInitialized) {
+            songAdapter.change(newList)
+            songList = newList
         }
-        songList = newList
-
     }
-
 }

@@ -33,7 +33,7 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
                 newList?.let {
                     songList = newList.toList()
                     // give it to songlist?
-                    retainList()
+                    retainList(songListFragment)
                 }
             }
         } else {
@@ -88,13 +88,13 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
             .add(R.id.fragContainer, songListFragment, SongListFragment.TAG)
             .commit()
     }
-    private fun retainList() {
+    private fun retainList(songListFragment: SongListFragment) {
         //  find the songlistfragment by tag, give it the data through
         //  some exposed fun like SongListFragment.updateList()
         //  songlistfragment updates adapter with list from activity
         val songListFrag = supportFragmentManager.findFragmentByTag(SongListFragment.TAG) as? SongListFragment
         if(songListFrag != null) {
-            songListFrag.updateList(songList)
+            songListFragment.updateList(songList)
         }
     }
     private fun getBundleSongList(songList: List<Song>): Bundle {
