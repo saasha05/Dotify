@@ -3,6 +3,7 @@
 Completed Branches
 - HW1
 - HW2
+- HW3
 
 Working on branches:
-- HW3
+- TBD
