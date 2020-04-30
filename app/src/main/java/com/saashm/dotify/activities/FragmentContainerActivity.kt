@@ -29,12 +29,12 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
                 clickedSong?.let {
                     onSongClicked(it)
                 }
-                var newList = getParcelableArrayList<Song>(ARG_SONG_LIST)
-                newList?.let {
-                    songList = newList.toList()
-                    // give it to songlist?
-                    retainList(songListFragment)
-                }
+//                var newList = getParcelableArrayList<Song>(ARG_SONG_LIST)
+//                newList?.let {
+//                    songList = newList.toList()
+//                    // give it to songlist?
+//                    retainList(songListFragment)
+//                }
             }
         } else {
             songList = SongDataProvider.getAllSongs()
@@ -56,7 +56,7 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putParcelable(ARG_CURR_SONG, clickedSong)
-        outState.putParcelableArrayList(ARG_SONG_LIST, ArrayList(songList))
+//        outState.putParcelableArrayList(ARG_SONG_LIST, ArrayList(songList))
     }
     private fun getNowPlayingFragment() = supportFragmentManager.findFragmentByTag(TAG) as? NowPlayingFragment
     private fun showNowPlaying() {
@@ -88,15 +88,16 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
             .add(R.id.fragContainer, songListFragment, SongListFragment.TAG)
             .commit()
     }
-    private fun retainList(songListFragment: SongListFragment) {
-        //  find the songlistfragment by tag, give it the data through
-        //  some exposed fun like SongListFragment.updateList()
-        //  songlistfragment updates adapter with list from activity
-        val songListFrag = supportFragmentManager.findFragmentByTag(SongListFragment.TAG) as? SongListFragment
-        if(songListFrag != null) {
-            songListFragment.updateList(songList)
-        }
-    }
+
+//    private fun retainList(songListFragment: SongListFragment) {
+//        //  find the songlistfragment by tag, give it the data through
+//        //  some exposed fun like SongListFragment.updateList()
+//        //  songlistfragment updates adapter with list from activity
+//        val songListFrag = supportFragmentManager.findFragmentByTag(SongListFragment.TAG) as? SongListFragment
+//        if(songListFrag != null) {
+//            songListFragment.updateList(songList)
+//        }
+//    }
     private fun getBundleSongList(songList: List<Song>): Bundle {
         val allSongsBundle = Bundle().apply {
             val list = ArrayList(songList)

@@ -31,52 +31,52 @@ class SongListFragment: Fragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (savedInstanceState != null) {
+            with(savedInstanceState) {
+                songList = getParcelableArrayList<Song>(ARG_SONG_LIST) as List<Song>
+            }
+        }
+        arguments?.let { args ->
+            songList = args.getParcelableArrayList<Song>(ARG_SONG_LIST) as List<Song>
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        if (savedInstanceState != null) {
-//            with(savedInstanceState) {
-//                songList = getParcelableArrayList<Song>(ARG_SONG_LIST) as List<Song>
-//            }
-//        }
-        arguments?.let { args ->
-            songList = args.getParcelableArrayList<Song>(ARG_SONG_LIST) as List<Song>
-        }
         return layoutInflater.inflate(R.layout.activity_song_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         songAdapter = SongAdapter(songList)
-//        if(songList != null) {
-//            songAdapter.change(songList)
-//        }
         rvSongs.adapter = songAdapter
         // to change mini player text when song is clicked
-        songAdapter?.onSongClickListener = { song ->
+        songAdapter.onSongClickListener = { song ->
             onSongClickListener?.onSongClicked(song)
         }
     }
 
-//    override fun onSaveInstanceState(outState: Bundle) {
-//        outState.putParcelableArrayList(ARG_SONG_LIST, ArrayList(songList))
-//        super.onSaveInstanceState(outState)
-//    }
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelableArrayList(ARG_SONG_LIST, ArrayList(songList))
+        super.onSaveInstanceState(outState)
+    }
 
     fun shuffleList(): List<Song> {
         val newSongs = songList.shuffled()
-        songAdapter?.change(newSongs)
+        songAdapter.change(newSongs)
         songList = newSongs
         return songList
     }
 
-    fun updateList(newList: List<Song>) {
-        if(::songAdapter.isInitialized) {
-            songAdapter.change(newList)
-            songList = newList
-        }
-    }
+//    fun updateList(newList: List<Song>) {
+//        if(::songAdapter.isInitialized) {
+//            songAdapter.change(newList)
+//            songList = newList
+//        }
+//    }
+
 }
