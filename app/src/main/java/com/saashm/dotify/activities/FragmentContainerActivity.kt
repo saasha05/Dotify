@@ -3,6 +3,7 @@ package com.saashm.dotify.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.FragmentTransaction
 import com.ericchee.songdataprovider.Song
 import com.ericchee.songdataprovider.SongDataProvider
 import com.saashm.dotify.OnSongClickListener
@@ -64,6 +65,7 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
                 .beginTransaction()
                 .add(R.id.fragContainer, nowPlayingFragment, TAG)
                 .addToBackStack(TAG)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit()
         } else {
             // If it already exists then update song
@@ -78,6 +80,7 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
         supportFragmentManager
             .beginTransaction()
             .add(R.id.fragContainer, songListFragment, SongListFragment.TAG)
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             .commit()
     }
 

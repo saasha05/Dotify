@@ -23,7 +23,6 @@ class SongAdapter(listOfSongs: List<Song>): RecyclerView.Adapter<SongAdapter.Son
     override fun onBindViewHolder(holder: SongViewHolder, position: Int) {
         val currSong = listOfSongs[position]
         holder.bind(currSong)
-
     }
 
     fun change(newSongs: List<Song>) {
@@ -53,5 +52,6 @@ class SongAdapter(listOfSongs: List<Song>): RecyclerView.Adapter<SongAdapter.Son
             }
         }
     }
+
 
 }

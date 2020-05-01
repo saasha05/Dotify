@@ -60,6 +60,7 @@ class SongListFragment: Fragment() {
         songAdapter.onSongClickListener = { song ->
             onSongClickListener?.onSongClicked(song)
         }
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
