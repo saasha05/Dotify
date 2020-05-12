@@ -22,7 +22,6 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fragment_container)
-        val songListFragment = SongListFragment()
         if (savedInstanceState != null) {
             with(savedInstanceState) {
                 clickedSong = getParcelable(ARG_CURR_SONG)
@@ -32,7 +31,11 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
             }
         } else {
             songList = SongDataProvider.getAllSongs()
-            showSongList(songListFragment)
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.fragContainer, SongListFragment.getInstance(songList), SongListFragment.TAG)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .commit()
         }
         checkBackStack()
         setOnClickListeners()
@@ -56,11 +59,7 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
         // Add Now playing fragment with selected song
         var nowPlayingFragment = getNowPlayingFragment()
         if(nowPlayingFragment == null) {
-            nowPlayingFragment = NowPlayingFragment()
-            val argumentBundle = Bundle().apply {
-                putParcelable(ARG_SONG, clickedSong)
-            }
-            nowPlayingFragment.arguments = argumentBundle
+            nowPlayingFragment = NowPlayingFragment.getInstance(clickedSong, null)
             supportFragmentManager
                 .beginTransaction()
                 .add(R.id.fragContainer, nowPlayingFragment, TAG)
@@ -70,27 +69,9 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
         } else {
             // If it already exists then update song
             nowPlayingFragment.updateSong(clickedSong)
-
         }
-
-    }
-    private fun showSongList(songListFragment: SongListFragment) {
-        val allSongsBundle = getBundleSongList(songList)
-        songListFragment.arguments = allSongsBundle
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.fragContainer, songListFragment, SongListFragment.TAG)
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-            .commit()
     }
 
-    private fun getBundleSongList(songList: List<Song>): Bundle {
-        val allSongsBundle = Bundle().apply {
-            val list = ArrayList(songList)
-            putParcelableArrayList(ARG_SONG_LIST, list)
-        }
-        return (allSongsBundle)
-    }
     private fun setOnClickListeners() {
         miniPlayer.setOnClickListener {
             if(clickedSong != null) {

@@ -23,6 +23,14 @@ class SongListFragment: Fragment() {
     companion object {
         const val ARG_SONG_LIST = "arg_song_list"
         val TAG: String = SongListFragment::class.java.simpleName
+        fun getInstance(songs: List<Song>) : SongListFragment {
+            val songListFrag = SongListFragment()
+            songListFrag.arguments = Bundle().apply {
+                val list = ArrayList(songs)
+                putParcelableArrayList(ARG_SONG_LIST, list)
+            }
+            return songListFrag
+        }
     }
     override fun onAttach(context: Context) {
         super.onAttach(context)

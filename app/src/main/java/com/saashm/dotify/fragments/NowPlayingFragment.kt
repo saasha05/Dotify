@@ -20,6 +20,16 @@ class NowPlayingFragment: Fragment() {
         val TAG: String = NowPlayingFragment::class.java.simpleName
         const val ARG_SONG = "arg_song"
         const val ARG_COUNT = "arg_count"
+        fun getInstance(song: Song?, count: Int?): NowPlayingFragment {
+            val nowPlayingFragment = NowPlayingFragment()
+            nowPlayingFragment.arguments = Bundle().apply {
+                putParcelable(ARG_SONG, song)
+               count?.let{
+                   putInt(ARG_COUNT, count)
+               }
+            }
+           return nowPlayingFragment
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
