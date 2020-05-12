@@ -3,22 +3,29 @@ package com.saashm.dotify.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import com.ericchee.songdataprovider.Song
 import com.saashm.dotify.DotifyApp
-import com.saashm.dotify.OnSongClickListener
+import com.saashm.dotify.backend.OnSongClickListener
 import com.saashm.dotify.R
+import com.saashm.dotify.backend.OnSongChangeListener
+import com.saashm.dotify.backend.SongManager
 import com.saashm.dotify.fragments.NowPlayingFragment
 import com.saashm.dotify.fragments.NowPlayingFragment.Companion.TAG
 import com.saashm.dotify.fragments.SongListFragment
 import kotlinx.android.synthetic.main.activity_fragment_container.*
 
-class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
+class FragmentContainerActivity : AppCompatActivity(),
+    OnSongClickListener {
     private var clickedSong: Song? = null
+    lateinit var manager: SongManager
 //    private val ARG_CURR_SONG: String = "arg_curr_song"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fragment_container)
+        manager = (applicationContext as DotifyApp).songManager
+//        manager.songChangeListener = this
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
@@ -26,7 +33,7 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit()
         }
-        clickedSong = app().currentSong
+        clickedSong = manager.currentSong
         clickedSong?.let {
             tvCurrSong.text = getString(R.string.song_artist, it.title, it.artist)
         }
@@ -41,12 +48,6 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
         checkBackStack()
         setOnClickListeners()
     }
-    override fun onSongClicked(song: Song) {
-        tvCurrSong.text = getString(R.string.song_artist, song.title, song.artist)
-        clickedSong = song
-        app().updateCurrentSong(song)
-    }
-
     override fun onSupportNavigateUp(): Boolean {
         supportFragmentManager.popBackStack()
         return super.onNavigateUp()
@@ -57,6 +58,7 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
 //        outState.putParcelable(ARG_CURR_SONG, clickedSong)
 //    }
     private fun getNowPlayingFragment() = supportFragmentManager.findFragmentByTag(TAG) as? NowPlayingFragment
+
     private fun showNowPlaying() {
         // Add Now playing fragment with selected song
         var nowPlayingFragment = getNowPlayingFragment()
@@ -73,7 +75,6 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
             nowPlayingFragment.updateSong(clickedSong)
         }
     }
-
     private fun setOnClickListeners() {
         miniPlayer.setOnClickListener {
             if(clickedSong != null) {
@@ -96,12 +97,20 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
             }
         }
     }
+
     private fun checkBackStack() {
         if (supportFragmentManager.backStackEntryCount > 0) {
             miniPlayer.visibility = View.INVISIBLE
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
     }
-    private fun app() = (applicationContext as DotifyApp)
+    override fun onSongClicked(song: Song) {
+        tvCurrSong.text = getString(R.string.song_artist, song.title, song.artist)
+        manager.updateCurrentSong(song)
+    }
+
+//    override fun onSongChange(song: Song) {
+//        Toast.makeText(this, "ON SONG CHANGE", Toast.LENGTH_SHORT)
+//    }
 
 }

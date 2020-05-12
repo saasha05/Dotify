@@ -8,15 +8,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ericchee.songdataprovider.Song
 import com.saashm.dotify.DotifyApp
-import com.saashm.dotify.OnSongClickListener
+import com.saashm.dotify.backend.OnSongClickListener
 import com.saashm.dotify.R
-import com.saashm.dotify.SongAdapter
+import com.saashm.dotify.backend.SongAdapter
+import com.saashm.dotify.backend.SongManager
 import kotlinx.android.synthetic.main.activity_song_list.*
 
 class SongListFragment: Fragment() {
     private lateinit var songAdapter: SongAdapter
     private var onSongClickListener: OnSongClickListener? = null
     private lateinit var songList: List<Song>
+    private lateinit var manager: SongManager
     companion object {
         const val ARG_SONG_LIST = "arg_song_list"
         val TAG: String = SongListFragment::class.java.simpleName
@@ -29,7 +31,8 @@ class SongListFragment: Fragment() {
         if (context is OnSongClickListener) {
             onSongClickListener = context
         }
-        songList = app().allSongs
+        manager = (context.applicationContext as DotifyApp).songManager
+        songList = manager.allSongs
     }
 
 //    override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,11 +73,8 @@ class SongListFragment: Fragment() {
     }
 
     fun shuffleList() {
-        val newSongs = songList.shuffled()
-        songAdapter.change(newSongs)
-        songList = newSongs
-        app().updateSongs(newSongs)
+        manager.shuffle()
+        songAdapter.change(manager.allSongs)
         rvSongs.smoothScrollToPosition(0)
     }
-    private fun app() = (context?.applicationContext as DotifyApp)
 }

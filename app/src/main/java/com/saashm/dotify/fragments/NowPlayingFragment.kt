@@ -45,8 +45,8 @@ class NowPlayingFragment: Fragment() {
             // default behavior
                 num = Random.nextInt(1000, 99999)
         }
-        val songFromApp = (context?.applicationContext as DotifyApp).currentSong
-        songFromApp?.let {
+        val app = context?.applicationContext as DotifyApp
+        app.songManager.currentSong?.let {
            currSong = it
        }
     }

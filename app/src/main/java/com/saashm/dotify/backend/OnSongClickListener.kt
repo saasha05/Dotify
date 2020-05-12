@@ -1,4 +1,4 @@
-package com.saashm.dotify
+package com.saashm.dotify.backend
 
 import com.ericchee.songdataprovider.Song
 

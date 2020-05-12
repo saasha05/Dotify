@@ -1,4 +1,4 @@
-package com.saashm.dotify
+package com.saashm.dotify.backend
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ericchee.songdataprovider.Song
+import com.saashm.dotify.R
 
 class SongAdapter(listOfSongs: List<Song>): RecyclerView.Adapter<SongAdapter.SongViewHolder>() {
     private var listOfSongs: List<Song> = listOfSongs.toList()
@@ -26,7 +27,8 @@ class SongAdapter(listOfSongs: List<Song>): RecyclerView.Adapter<SongAdapter.Son
     }
 
     fun change(newSongs: List<Song>) {
-        val callback = SongDiffCallback(listOfSongs, newSongs)
+        val callback =
+            SongDiffCallback(listOfSongs, newSongs)
         val diffRes = DiffUtil.calculateDiff(callback)
         diffRes.dispatchUpdatesTo(this)
         listOfSongs = newSongs
