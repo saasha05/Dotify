@@ -2,18 +2,15 @@ package com.saashm.dotify.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ericchee.songdataprovider.Song
-import com.ericchee.songdataprovider.SongDataProvider
+import com.saashm.dotify.DotifyApp
 import com.saashm.dotify.OnSongClickListener
 import com.saashm.dotify.R
 import com.saashm.dotify.SongAdapter
-import com.saashm.dotify.fragments.NowPlayingFragment.Companion.ARG_SONG
-import kotlinx.android.synthetic.main.activity_fragment_container.*
 import kotlinx.android.synthetic.main.activity_song_list.*
 
 class SongListFragment: Fragment() {
@@ -23,13 +20,8 @@ class SongListFragment: Fragment() {
     companion object {
         const val ARG_SONG_LIST = "arg_song_list"
         val TAG: String = SongListFragment::class.java.simpleName
-        fun getInstance(songs: List<Song>) : SongListFragment {
-            val songListFrag = SongListFragment()
-            songListFrag.arguments = Bundle().apply {
-                val list = ArrayList(songs)
-                putParcelableArrayList(ARG_SONG_LIST, list)
-            }
-            return songListFrag
+        fun getInstance() : SongListFragment {
+            return SongListFragment()
         }
     }
     override fun onAttach(context: Context) {
@@ -37,21 +29,22 @@ class SongListFragment: Fragment() {
         if (context is OnSongClickListener) {
             onSongClickListener = context
         }
+        songList = app().allSongs
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (savedInstanceState != null) {
-            with(savedInstanceState) {
-                songList = getParcelableArrayList<Song>(ARG_SONG_LIST) as List<Song>
-            }
-        } else {
-            arguments?.let { args ->
-                songList = args.getParcelableArrayList<Song>(ARG_SONG_LIST) as List<Song>
-            }
-        }
-
-    }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        if (savedInstanceState != null) {
+//            with(savedInstanceState) {
+//                songList = getParcelableArrayList<Song>(ARG_SONG_LIST) as List<Song>
+//            }
+//        } else {
+//            arguments?.let { args ->
+//                songList = args.getParcelableArrayList<Song>(ARG_SONG_LIST) as List<Song>
+//            }
+//        }
+//
+//    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -80,6 +73,8 @@ class SongListFragment: Fragment() {
         val newSongs = songList.shuffled()
         songAdapter.change(newSongs)
         songList = newSongs
+        app().updateSongs(newSongs)
         rvSongs.smoothScrollToPosition(0)
     }
+    private fun app() = (context?.applicationContext as DotifyApp)
 }

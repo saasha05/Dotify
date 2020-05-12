@@ -5,44 +5,46 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.FragmentTransaction
 import com.ericchee.songdataprovider.Song
-import com.ericchee.songdataprovider.SongDataProvider
+import com.saashm.dotify.DotifyApp
 import com.saashm.dotify.OnSongClickListener
 import com.saashm.dotify.R
 import com.saashm.dotify.fragments.NowPlayingFragment
-import com.saashm.dotify.fragments.NowPlayingFragment.Companion.ARG_SONG
 import com.saashm.dotify.fragments.NowPlayingFragment.Companion.TAG
 import com.saashm.dotify.fragments.SongListFragment
-import com.saashm.dotify.fragments.SongListFragment.Companion.ARG_SONG_LIST
 import kotlinx.android.synthetic.main.activity_fragment_container.*
 
 class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
     private var clickedSong: Song? = null
-    private val ARG_CURR_SONG: String = "arg_curr_song"
-    private lateinit var songList: List<Song>
+//    private val ARG_CURR_SONG: String = "arg_curr_song"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fragment_container)
-        if (savedInstanceState != null) {
-            with(savedInstanceState) {
-                clickedSong = getParcelable(ARG_CURR_SONG)
-                clickedSong?.let {
-                    onSongClicked(it)
-                }
-            }
-        } else {
-            songList = SongDataProvider.getAllSongs()
+        if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .add(R.id.fragContainer, SongListFragment.getInstance(songList), SongListFragment.TAG)
+                .add(R.id.fragContainer, SongListFragment.getInstance(), SongListFragment.TAG)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit()
         }
+        clickedSong = app().currentSong
+        clickedSong?.let {
+            tvCurrSong.text = getString(R.string.song_artist, it.title, it.artist)
+        }
+//        else {
+//            with(savedInstanceState) {
+//                clickedSong = getParcelable(ARG_CURR_SONG)
+//                clickedSong?.let {
+//                    onSongClicked(it)
+//                }
+//            }
+//        }
         checkBackStack()
         setOnClickListeners()
     }
     override fun onSongClicked(song: Song) {
         tvCurrSong.text = getString(R.string.song_artist, song.title, song.artist)
         clickedSong = song
+        app().updateCurrentSong(song)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -50,16 +52,16 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
         return super.onNavigateUp()
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putParcelable(ARG_CURR_SONG, clickedSong)
-    }
+//    override fun onSaveInstanceState(outState: Bundle) {
+//        super.onSaveInstanceState(outState)
+//        outState.putParcelable(ARG_CURR_SONG, clickedSong)
+//    }
     private fun getNowPlayingFragment() = supportFragmentManager.findFragmentByTag(TAG) as? NowPlayingFragment
     private fun showNowPlaying() {
         // Add Now playing fragment with selected song
         var nowPlayingFragment = getNowPlayingFragment()
         if(nowPlayingFragment == null) {
-            nowPlayingFragment = NowPlayingFragment.getInstance(clickedSong, null)
+            nowPlayingFragment = NowPlayingFragment.getInstance()
             supportFragmentManager
                 .beginTransaction()
                 .add(R.id.fragContainer, nowPlayingFragment, TAG)
@@ -100,5 +102,6 @@ class FragmentContainerActivity : AppCompatActivity(), OnSongClickListener {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
     }
+    private fun app() = (applicationContext as DotifyApp)
 
 }

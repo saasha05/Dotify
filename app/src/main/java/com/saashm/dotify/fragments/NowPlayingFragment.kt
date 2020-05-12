@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.ericchee.songdataprovider.Song
+import com.saashm.dotify.DotifyApp
 import com.saashm.dotify.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.properties.Delegates
@@ -18,17 +19,16 @@ class NowPlayingFragment: Fragment() {
 
     companion object {
         val TAG: String = NowPlayingFragment::class.java.simpleName
-        const val ARG_SONG = "arg_song"
+//        const val ARG_SONG = "arg_song"
         const val ARG_COUNT = "arg_count"
-        fun getInstance(song: Song?, count: Int?): NowPlayingFragment {
-            val nowPlayingFragment = NowPlayingFragment()
-            nowPlayingFragment.arguments = Bundle().apply {
-                putParcelable(ARG_SONG, song)
-               count?.let{
-                   putInt(ARG_COUNT, count)
-               }
-            }
-           return nowPlayingFragment
+        fun getInstance(): NowPlayingFragment {
+            //            nowPlayingFragment.arguments = Bundle().apply {
+//                putParcelable(ARG_SONG, song)
+//               count?.let{
+//                   putInt(ARG_COUNT, count)
+//               }
+//            }
+           return NowPlayingFragment()
         }
     }
 
@@ -36,26 +36,19 @@ class NowPlayingFragment: Fragment() {
         super.onCreate(savedInstanceState)
         if (savedInstanceState != null) {
             with(savedInstanceState) {
-                val song: Song? = getParcelable(ARG_SONG)
                 val count = getInt(ARG_COUNT)
-                song?.let {
-                    currSong = it
-                }
                 count.let {
                     num = it
                 }
             }
         } else {
             // default behavior
-            arguments?.let { args ->
-                val song = args.getParcelable<Song>(ARG_SONG)
-                if (song != null) {
-                    this.currSong = song
-                }
                 num = Random.nextInt(1000, 99999)
-
-            }
         }
+        val songFromApp = (context?.applicationContext as DotifyApp).currentSong
+        songFromApp?.let {
+           currSong = it
+       }
     }
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -75,7 +68,6 @@ class NowPlayingFragment: Fragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putInt(ARG_COUNT, num)
-        outState.putParcelable(ARG_SONG, currSong)
         super.onSaveInstanceState(outState)
 
     }

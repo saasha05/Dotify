@@ -22,8 +22,10 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="471a313f-47d7-4246-b9ca-ff86eb0c9a3f" name="Default Changelist" comment="">
+    <list default="true" id="471a313f-47d7-4246-b9ca-ff86eb0c9a3f" name="Default Changelist" comment="application added">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/DotifyApp.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/activities/FragmentContainerActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/activities/FragmentContainerActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/fragments/NowPlayingFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/fragments/NowPlayingFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/fragments/SongListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/fragments/SongListFragment.kt" afterDir="false" />
@@ -59,12 +61,12 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="layoutResourceFile_vertical" />
-        <option value="Kotlin Class" />
         <option value="Kotlin File" />
         <option value="Kotlin Interface" />
         <option value="valueResourceFile" />
         <option value="layoutResourceFile" />
         <option value="resourceFile" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -84,7 +86,7 @@
     <property name="DEBUGGABLE_PROCESS" value="com.saashm.dotify" />
     <property name="DEBUGGER_ID" value="Auto" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_3_API_29" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-04-07T18:08:44.141Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-05-12T17:05:14.535Z" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/Dotify-hw2" />
@@ -97,9 +99,8 @@
     <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\saash\Desktop\Sp'20\INFO448\Dotify\app\src\main\res\layout" />
-      <recent name="C:\Users\saash\Desktop\Sp'20\INFO448\Dotify\imgs" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\saash\Desktop\Sp'20\INFO448\Dotify\app\src\main\res\drawable" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
       <recent name="com.saashm.dotify" />
@@ -112,8 +113,9 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.saashm.dotify" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\saash\Desktop\Sp'20\INFO448\Dotify\app\src\main\res\drawable" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\saash\Desktop\Sp'20\INFO448\Dotify\app\src\main\res\layout" />
+      <recent name="C:\Users\saash\Desktop\Sp'20\INFO448\Dotify\imgs" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -559,7 +561,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Part 2 done" />
     <MESSAGE value="LongClick delete error" />
     <MESSAGE value="Back button implemented, long click still fkd" />
     <MESSAGE value="everything works" />
@@ -584,6 +585,18 @@
     <MESSAGE value="REJOICE" />
     <MESSAGE value="readme update" />
     <MESSAGE value="lil animation" />
-    <option name="LAST_COMMIT_MESSAGE" value="lil animation" />
+    <MESSAGE value="application added" />
+    <option name="LAST_COMMIT_MESSAGE" value="application added" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/fragments/NowPlayingFragment.kt</url>
+          <line>51</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
