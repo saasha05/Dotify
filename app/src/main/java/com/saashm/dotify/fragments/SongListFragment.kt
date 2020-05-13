@@ -15,12 +15,11 @@ import com.saashm.dotify.backend.SongManager
 import kotlinx.android.synthetic.main.activity_song_list.*
 
 class SongListFragment: Fragment() {
-    private lateinit var songAdapter: SongAdapter
+    private var songAdapter: SongAdapter? = null
     private var onSongClickListener: OnSongClickListener? = null
     private var songList: List<Song>? = null
     private lateinit var manager: SongManager
     companion object {
-        const val ARG_SONG_LIST = "arg_song_list"
         val TAG: String = SongListFragment::class.java.simpleName
         fun getInstance() : SongListFragment {
             return SongListFragment()
@@ -35,19 +34,6 @@ class SongListFragment: Fragment() {
         songList = manager.allSongs
     }
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        if (savedInstanceState != null) {
-//            with(savedInstanceState) {
-//                songList = getParcelableArrayList<Song>(ARG_SONG_LIST) as List<Song>
-//            }
-//        } else {
-//            arguments?.let { args ->
-//                songList = args.getParcelableArrayList<Song>(ARG_SONG_LIST) as List<Song>
-//            }
-//        }
-//
-//    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -60,26 +46,19 @@ class SongListFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         songList?.let {
             songAdapter = SongAdapter(it)
+            rvSongs.adapter = songAdapter
+            // to change mini player text when song is clicked
+            songAdapter?.onSongClickListener = { song ->
+                (context?.applicationContext as DotifyApp).songManager.onSongClicked(song)
+                onSongClickListener?.onSongClicked(song)
+            }
         }
-
-        rvSongs.adapter = songAdapter
-        // to change mini player text when song is clicked
-        songAdapter.onSongClickListener = { song ->
-            (context?.applicationContext as DotifyApp).songManager.onSongClicked(song)
-            onSongClickListener?.onSongClicked(song)
-        }
-
     }
-
-//    override fun onSaveInstanceState(outState: Bundle) {
-//        super.onSaveInstanceState(outState)
-//        outState.putParcelableArrayList(ARG_SONG_LIST, ArrayList(songList))
-//    }
 
     fun shuffleList() {
         manager.shuffle()
         manager.allSongs?.let {
-            songAdapter.change(it)
+            songAdapter?.change(it)
         }
         rvSongs.smoothScrollToPosition(0)
     }

@@ -16,9 +16,9 @@ class SongManager(context: Context) {
     var currentSong: Song? = null
     var allSongs: List<Song>? = null
     var onSongClickListener: OnSongClickListener? = null
-    init {
-        allSongs = SongDataProvider.getAllSongs()
-    }
+//    init {
+//        allSongs = SongDataProvider.getAllSongs()
+//    }
     fun onSongClicked(song: Song) {
         currentSong = song
         onSongClickListener?.onSongClicked(song)
@@ -28,15 +28,15 @@ class SongManager(context: Context) {
             shuffle()
         }.toList()
     }
-    fun getAllSongs(onListReady: (User) -> Unit, onError: (() -> Unit)? = null) {
-//        val emailURL = "https://raw.githubusercontent.com/echeeUW/codesnippets/master/musiclibrary.json"
-        val emailURL = "https://raw.githubusercontent.com/echeeUW/codesnippets/master/user_info.json"
+    fun getAllSongs(onListReady: (AllSongs) -> Unit, onError: (() -> Unit)? = null) {
+        val emailURL = "https://raw.githubusercontent.com/echeeUW/codesnippets/master/musiclibrary.json"
+//        val emailURL = "https://raw.githubusercontent.com/echeeUW/codesnippets/master/user_info.json"
         val request = StringRequest(
             Request.Method.GET, emailURL,
             { response ->
                 // Success
                 val gson = Gson()
-                val allEmails = gson.fromJson(response, User::class.java )
+                val allEmails = gson.fromJson(response, AllSongs::class.java )
                 onListReady(allEmails)
             },
             {

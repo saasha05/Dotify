@@ -26,7 +26,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/DotifyApp.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/DotifyApp.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/activities/FragmentContainerActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/activities/FragmentContainerActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/backend/AllSongs.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/backend/AllSongs.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/backend/SongManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/backend/SongManager.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/fragments/SongListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/fragments/SongListFragment.kt" afterDir="false" />
     </list>
@@ -85,8 +84,8 @@
     <property name="DEBUGGABLE_DEVICE" value="emulator-5554" />
     <property name="DEBUGGABLE_PROCESS" value="com.saashm.dotify" />
     <property name="DEBUGGER_ID" value="Auto" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_3_API_29" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-05-12T17:05:14.535Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="fa822dd1" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-05-13T13:27:03.278Z" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/Dotify-hw2" />
@@ -201,13 +200,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1586274716312</updated>
-    </task>
-    <task id="LOCAL-00005" summary="functions mostly correctly">
-      <created>1586316514599</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1586316514599</updated>
     </task>
     <task id="LOCAL-00006" summary="functions mostly correctly">
       <created>1586317111698</created>
@@ -545,7 +537,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589336655605</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="app crashes">
+      <created>1589344367701</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1589344367702</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -562,7 +561,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="readme updated" />
     <MESSAGE value="UI updated" />
     <MESSAGE value="README updated" />
     <MESSAGE value="image update" />
@@ -587,15 +585,37 @@
     <MESSAGE value="created manager" />
     <MESSAGE value="manager works" />
     <MESSAGE value="lateinit doesn't work" />
-    <option name="LAST_COMMIT_MESSAGE" value="lateinit doesn't work" />
+    <MESSAGE value="app crashes" />
+    <option name="LAST_COMMIT_MESSAGE" value="app crashes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/DotifyApp.kt</url>
-          <line>12</line>
-          <option name="timeStamp" value="10" />
+          <line>14</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/fragments/SongListFragment.kt</url>
+          <line>33</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/fragments/SongListFragment.kt</url>
+          <line>46</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/fragments/SongListFragment.kt</url>
+          <line>48</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-function">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/saashm/dotify/DotifyApp.kt</url>
+          <line>9</line>
+          <properties class="com.saashm.dotify.DotifyApp" method="onCreate" />
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -19,7 +19,6 @@ class FragmentContainerActivity : AppCompatActivity(),
     OnSongClickListener {
     private var clickedSong: Song? = null
     private lateinit var manager: SongManager
-//    private val ARG_CURR_SONG: String = "arg_curr_song"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fragment_container)
