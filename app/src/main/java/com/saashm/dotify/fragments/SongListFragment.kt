@@ -62,6 +62,7 @@ class SongListFragment: Fragment() {
         rvSongs.adapter = songAdapter
         // to change mini player text when song is clicked
         songAdapter.onSongClickListener = { song ->
+            (context?.applicationContext as DotifyApp).songManager.onSongClicked(song)
             onSongClickListener?.onSongClicked(song)
         }
 

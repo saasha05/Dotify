@@ -9,7 +9,6 @@ import com.ericchee.songdataprovider.Song
 import com.saashm.dotify.DotifyApp
 import com.saashm.dotify.backend.OnSongClickListener
 import com.saashm.dotify.R
-import com.saashm.dotify.backend.OnSongChangeListener
 import com.saashm.dotify.backend.SongManager
 import com.saashm.dotify.fragments.NowPlayingFragment
 import com.saashm.dotify.fragments.NowPlayingFragment.Companion.TAG
@@ -19,24 +18,28 @@ import kotlinx.android.synthetic.main.activity_fragment_container.*
 class FragmentContainerActivity : AppCompatActivity(),
     OnSongClickListener {
     private var clickedSong: Song? = null
-    lateinit var manager: SongManager
+    private lateinit var manager: SongManager
 //    private val ARG_CURR_SONG: String = "arg_curr_song"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fragment_container)
         manager = (applicationContext as DotifyApp).songManager
-//        manager.songChangeListener = this
+        manager.onSongClickListener = this
+        clickedSong = manager.currentSong
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
                 .add(R.id.fragContainer, SongListFragment.getInstance(), SongListFragment.TAG)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit()
+        } else {
+            if(clickedSong != null) {
+                tvCurrSong.text = getString(R.string.song_artist, clickedSong!!.title, clickedSong!!.artist)
+            }
         }
-        clickedSong = manager.currentSong
-        clickedSong?.let {
-            tvCurrSong.text = getString(R.string.song_artist, it.title, it.artist)
-        }
+//        clickedSong?.let {
+//            tvCurrSong.text = getString(R.string.song_artist, it.title, it.artist)
+//        }
 //        else {
 //            with(savedInstanceState) {
 //                clickedSong = getParcelable(ARG_CURR_SONG)
@@ -106,11 +109,6 @@ class FragmentContainerActivity : AppCompatActivity(),
     }
     override fun onSongClicked(song: Song) {
         tvCurrSong.text = getString(R.string.song_artist, song.title, song.artist)
-        manager.updateCurrentSong(song)
     }
-
-//    override fun onSongChange(song: Song) {
-//        Toast.makeText(this, "ON SONG CHANGE", Toast.LENGTH_SHORT)
-//    }
 
 }

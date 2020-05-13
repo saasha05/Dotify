@@ -6,13 +6,13 @@ import com.ericchee.songdataprovider.SongDataProvider
 class SongManager {
     var currentSong: Song? = null
     var allSongs: List<Song>
-//    var songChangeListener: OnSongChangeListener? = null
+    var onSongClickListener: OnSongClickListener? = null
     init {
         allSongs = SongDataProvider.getAllSongs()
     }
-    fun updateCurrentSong(song: Song) {
+    fun onSongClicked(song: Song) {
         currentSong = song
-//        songChangeListener?.onSongChange(song)
+        onSongClickListener?.onSongClicked(song)
     }
     fun shuffle() {
         allSongs = allSongs.toMutableList().apply {
