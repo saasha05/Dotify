@@ -38,5 +38,10 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     // Song data provider
     implementation 'com.ericchee:songdataprovider:1.0.5'
+    // HTTP requests from Volley
+    implementation 'com.android.volley:volley:1.1.1'
+    //Gson
+    implementation 'com.google.code.gson:gson:2.8.6'
+
 
 }
