@@ -44,8 +44,17 @@ class SongListFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setAdapter()
+    }
+    fun updateList() {
+        songList = manager.allSongs
+        if(songAdapter == null && songList != null) {
+            setAdapter()
+        }
+    }
+    private fun setAdapter() {
         songList?.let {
-            songAdapter = SongAdapter(it)
+            songAdapter = SongAdapter(songList!!)
             rvSongs.adapter = songAdapter
             // to change mini player text when song is clicked
             songAdapter?.onSongClickListener = { song ->
@@ -54,7 +63,6 @@ class SongListFragment: Fragment() {
             }
         }
     }
-
     fun shuffleList() {
         manager.shuffle()
         manager.allSongs?.let {

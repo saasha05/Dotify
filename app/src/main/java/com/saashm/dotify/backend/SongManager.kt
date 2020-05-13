@@ -16,9 +16,8 @@ class SongManager(context: Context) {
     var currentSong: Song? = null
     var allSongs: List<Song>? = null
     var onSongClickListener: OnSongClickListener? = null
-//    init {
-//        allSongs = SongDataProvider.getAllSongs()
-//    }
+    var listUpdate: UpdateListListener? = null
+
     fun onSongClicked(song: Song) {
         currentSong = song
         onSongClickListener?.onSongClicked(song)
@@ -28,9 +27,11 @@ class SongManager(context: Context) {
             shuffle()
         }.toList()
     }
+    fun updateList() {
+        listUpdate?.onListUpdate()
+    }
     fun getAllSongs(onListReady: (AllSongs) -> Unit, onError: (() -> Unit)? = null) {
         val emailURL = "https://raw.githubusercontent.com/echeeUW/codesnippets/master/musiclibrary.json"
-//        val emailURL = "https://raw.githubusercontent.com/echeeUW/codesnippets/master/user_info.json"
         val request = StringRequest(
             Request.Method.GET, emailURL,
             { response ->
@@ -47,4 +48,7 @@ class SongManager(context: Context) {
         queue.add(request)
     }
 
+}
+interface UpdateListListener {
+    fun onListUpdate()
 }

@@ -10,13 +10,14 @@ import com.saashm.dotify.DotifyApp
 import com.saashm.dotify.backend.OnSongClickListener
 import com.saashm.dotify.R
 import com.saashm.dotify.backend.SongManager
+import com.saashm.dotify.backend.UpdateListListener
 import com.saashm.dotify.fragments.NowPlayingFragment
 import com.saashm.dotify.fragments.NowPlayingFragment.Companion.TAG
 import com.saashm.dotify.fragments.SongListFragment
 import kotlinx.android.synthetic.main.activity_fragment_container.*
 
 class FragmentContainerActivity : AppCompatActivity(),
-    OnSongClickListener {
+    OnSongClickListener, UpdateListListener {
     private var clickedSong: Song? = null
     private lateinit var manager: SongManager
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +25,7 @@ class FragmentContainerActivity : AppCompatActivity(),
         setContentView(R.layout.activity_fragment_container)
         manager = (applicationContext as DotifyApp).songManager
         manager.onSongClickListener = this
+        manager.listUpdate = this
         clickedSong = manager.currentSong
         if (savedInstanceState == null) {
             supportFragmentManager
@@ -94,4 +96,8 @@ class FragmentContainerActivity : AppCompatActivity(),
         tvCurrSong.text = getString(R.string.song_artist, song.title, song.artist)
     }
 
+    override fun onListUpdate() {
+        var songListFrag = supportFragmentManager.findFragmentByTag(SongListFragment.TAG) as? SongListFragment
+        songListFrag?.updateList()
+    }
 }
