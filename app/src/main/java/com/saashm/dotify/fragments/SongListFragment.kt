@@ -5,11 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.ericchee.songdataprovider.Song
 import com.saashm.dotify.DotifyApp
 import com.saashm.dotify.backend.OnSongClickListener
 import com.saashm.dotify.R
+import com.saashm.dotify.backend.Song
 import com.saashm.dotify.backend.SongAdapter
 import com.saashm.dotify.backend.SongManager
 import kotlinx.android.synthetic.main.activity_song_list.*
@@ -45,6 +46,20 @@ class SongListFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setAdapter()
+        // set swipe to refresh
+        // currently not changing song list I think?
+        swipeContainer.setOnRefreshListener {
+            Toast.makeText(context, "Refreshing song list", Toast.LENGTH_LONG).show()
+            manager.getAllSongs({list ->
+                manager.allSongs = list.songs
+                manager.updateList()
+                Toast.makeText(context, "Refreshed!", Toast.LENGTH_LONG).show()
+                swipeContainer.isRefreshing = false
+            }, {
+                swipeContainer.isRefreshing = false
+                Toast.makeText(context, "Could not fetch song list", Toast.LENGTH_LONG).show()
+            })
+        }
     }
     fun updateList() {
         songList = manager.allSongs

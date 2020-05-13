@@ -3,12 +3,12 @@ package com.saashm.dotify.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import android.view.View.*
 import androidx.fragment.app.FragmentTransaction
-import com.ericchee.songdataprovider.Song
 import com.saashm.dotify.DotifyApp
 import com.saashm.dotify.backend.OnSongClickListener
 import com.saashm.dotify.R
+import com.saashm.dotify.backend.Song
 import com.saashm.dotify.backend.SongManager
 import com.saashm.dotify.backend.UpdateListListener
 import com.saashm.dotify.fragments.NowPlayingFragment
@@ -66,7 +66,7 @@ class FragmentContainerActivity : AppCompatActivity(),
     private fun setOnClickListeners() {
         miniPlayer.setOnClickListener {
             if(clickedSong != null) {
-                miniPlayer.visibility = View.INVISIBLE
+                miniPlayer.visibility = INVISIBLE
                 showNowPlaying()
             }
         }
@@ -74,30 +74,40 @@ class FragmentContainerActivity : AppCompatActivity(),
             val songListFragment = supportFragmentManager.findFragmentByTag(SongListFragment.TAG) as? SongListFragment
             songListFragment?.shuffleList()
         }
-        // to show back button based on stack
+
         supportFragmentManager.addOnBackStackChangedListener {
             val hasBackStack = supportFragmentManager.backStackEntryCount > 0
-            if(hasBackStack) {
+            if (hasBackStack) {
                 supportActionBar?.setDisplayHomeAsUpEnabled(true)
             } else {
                 supportActionBar?.setDisplayHomeAsUpEnabled(false)
-                miniPlayer.visibility = View.VISIBLE
+                miniPlayer.visibility = VISIBLE
             }
         }
+
     }
 
     private fun checkBackStack() {
         if (supportFragmentManager.backStackEntryCount > 0) {
-            miniPlayer.visibility = View.INVISIBLE
+            miniPlayer.visibility = INVISIBLE
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
     }
     override fun onSongClicked(song: Song) {
         tvCurrSong.text = getString(R.string.song_artist, song.title, song.artist)
+        clickedSong = song
     }
 
     override fun onListUpdate() {
-        var songListFrag = supportFragmentManager.findFragmentByTag(SongListFragment.TAG) as? SongListFragment
+        val songListFrag = supportFragmentManager.findFragmentByTag(SongListFragment.TAG) as? SongListFragment
         songListFrag?.updateList()
+    }
+
+    override fun toggleSpinner() {
+       if(progressBar.visibility == VISIBLE) {
+           progressBar.visibility = GONE
+       } else {
+           progressBar.visibility = VISIBLE
+       }
     }
 }
