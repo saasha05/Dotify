@@ -37,17 +37,6 @@ class FragmentContainerActivity : AppCompatActivity(),
                 tvCurrSong.text = getString(R.string.song_artist, clickedSong!!.title, clickedSong!!.artist)
             }
         }
-//        clickedSong?.let {
-//            tvCurrSong.text = getString(R.string.song_artist, it.title, it.artist)
-//        }
-//        else {
-//            with(savedInstanceState) {
-//                clickedSong = getParcelable(ARG_CURR_SONG)
-//                clickedSong?.let {
-//                    onSongClicked(it)
-//                }
-//            }
-//        }
         checkBackStack()
         setOnClickListeners()
     }
@@ -55,11 +44,6 @@ class FragmentContainerActivity : AppCompatActivity(),
         supportFragmentManager.popBackStack()
         return super.onNavigateUp()
     }
-
-//    override fun onSaveInstanceState(outState: Bundle) {
-//        super.onSaveInstanceState(outState)
-//        outState.putParcelable(ARG_CURR_SONG, clickedSong)
-//    }
     private fun getNowPlayingFragment() = supportFragmentManager.findFragmentByTag(TAG) as? NowPlayingFragment
 
     private fun showNowPlaying() {

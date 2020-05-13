@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_song_list.*
 class SongListFragment: Fragment() {
     private lateinit var songAdapter: SongAdapter
     private var onSongClickListener: OnSongClickListener? = null
-    private lateinit var songList: List<Song>
+    private var songList: List<Song>? = null
     private lateinit var manager: SongManager
     companion object {
         const val ARG_SONG_LIST = "arg_song_list"
@@ -58,7 +58,10 @@ class SongListFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        songAdapter = SongAdapter(songList)
+        songList?.let {
+            songAdapter = SongAdapter(it)
+        }
+
         rvSongs.adapter = songAdapter
         // to change mini player text when song is clicked
         songAdapter.onSongClickListener = { song ->
@@ -68,14 +71,16 @@ class SongListFragment: Fragment() {
 
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putParcelableArrayList(ARG_SONG_LIST, ArrayList(songList))
-    }
+//    override fun onSaveInstanceState(outState: Bundle) {
+//        super.onSaveInstanceState(outState)
+//        outState.putParcelableArrayList(ARG_SONG_LIST, ArrayList(songList))
+//    }
 
     fun shuffleList() {
         manager.shuffle()
-        songAdapter.change(manager.allSongs)
+        manager.allSongs?.let {
+            songAdapter.change(it)
+        }
         rvSongs.smoothScrollToPosition(0)
     }
 }
